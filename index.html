@@ -6,10 +6,9 @@
 <title>PR Tracker — Envision Energy</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
-
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#0f2137;--navy2:#172d47;--navy3:#1e3a5f;--navy4:#2a4f7c;
+  --navy:#0f2137;--navy2:#172d47;--navy3:#1e3a5f;
   --accent:#2e7ef5;--accent2:#1a5fcc;
   --grey1:#f5f7fa;--grey2:#eaeff5;--grey3:#d1dbe8;--grey4:#8fa3bb;--grey5:#4a6180;
   --white:#ffffff;--text:#0f2137;--text2:#3d5166;
@@ -22,64 +21,45 @@
   --radius:8px;--radius2:12px;
   font-family:'DM Sans',sans-serif;
 }
-
 body{background:var(--grey1);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5}
-
-/* TOPBAR */
 .topbar{background:var(--navy);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:50}
 .topbar-brand{display:flex;align-items:center;gap:10px}
-.brand-mark{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center}
-.brand-mark svg{width:16px;height:16px;fill:white}
+.brand-mark{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;font-weight:700}
 .brand-name{font-size:14px;font-weight:600;color:white;letter-spacing:.3px}
-.brand-div{width:1px;height:16px;background:rgba(255,255,255,.15);margin:0 4px}
-.brand-sub{font-size:12px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace}
+.brand-div{width:1px;height:16px;background:rgba(255,255,255,.2);margin:0 4px}
+.brand-sub{font-size:11px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace}
 .topbar-nav{display:flex;gap:2px}
-.tnav{background:none;border:none;color:rgba(255,255,255,.6);padding:7px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;transition:.15s;display:flex;align-items:center;gap:6px}
+.tnav{background:none;border:none;color:rgba(255,255,255,.6);padding:7px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;transition:.15s}
 .tnav:hover{background:rgba(255,255,255,.1);color:white}
 .tnav.active{background:rgba(255,255,255,.15);color:white}
-.tnav-icon{width:14px;height:14px;opacity:.7}
 .topbar-right{display:flex;align-items:center;gap:12px}
 .user-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:0.5px solid rgba(255,255,255,.12);border-radius:20px;padding:4px 12px 4px 4px}
 .avatar{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:white;flex-shrink:0}
 .user-name{font-size:11px;color:rgba(255,255,255,.7);font-family:'DM Mono',monospace}
-
-/* APPROVER BAR */
-.approver-bar{background:#92400e;color:#fef3c7;padding:8px 28px;font-size:12px;font-weight:500;display:none;align-items:center;justify-content:space-between;border-bottom:1px solid #b45309}
+.approver-bar{background:#92400e;color:#fef3c7;padding:8px 28px;font-size:12px;font-weight:500;display:none;align-items:center;justify-content:space-between}
 .approver-bar.show{display:flex}
-
-/* MAIN */
 .main{padding:28px 32px;max-width:1200px;margin:0 auto}
-
-/* PAGE HEADER */
 .page-hdr{margin-bottom:24px}
 .page-title{font-size:22px;font-weight:600;color:var(--navy);letter-spacing:-.3px}
 .page-sub{font-size:13px;color:var(--grey4);margin-top:3px}
-
-/* STEP BAR */
 .stepbar{display:flex;align-items:center;margin-bottom:28px;background:var(--white);border:0.5px solid var(--grey3);border-radius:var(--radius2);padding:16px 24px;box-shadow:var(--shadow)}
 .step{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--grey4);font-weight:500}
 .step.active{color:var(--navy)}
 .step.done{color:var(--success)}
-.sdot{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--grey3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;background:var(--white);flex-shrink:0;transition:.2s}
+.sdot{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--grey3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;background:var(--white);flex-shrink:0}
 .step.active .sdot{background:var(--navy);border-color:var(--navy);color:white}
-.step.done .sdot{background:var(--success);border-color:var(--success);color:white;font-size:13px}
+.step.done .sdot{background:var(--success);border-color:var(--success);color:white}
 .sline{flex:1;height:1px;background:var(--grey3);margin:0 12px}
 .sline.done{background:var(--success)}
-
-/* CARDS */
 .card{background:var(--white);border:0.5px solid var(--grey3);border-radius:var(--radius2);padding:24px;box-shadow:var(--shadow)}
 .card+.card{margin-top:16px}
-.card-hdr{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:18px;padding-bottom:12px;border-bottom:0.5px solid var(--grey2);display:flex;align-items:center;justify-content:space-between;text-transform:uppercase;letter-spacing:.5px}
-
-/* FORMS */
+.card-hdr{font-size:11px;font-weight:700;color:var(--grey5);margin-bottom:18px;padding-bottom:12px;border-bottom:0.5px solid var(--grey2);text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center;justify-content:space-between}
 .fgrid{display:grid;gap:16px}
 .fgrid.g3{grid-template-columns:repeat(3,1fr)}
 .fgrid.g2{grid-template-columns:repeat(2,1fr)}
-.fgrid.g4{grid-template-columns:repeat(4,1fr)}
 .fg{display:flex;flex-direction:column;gap:5px}
 .fg.s2{grid-column:span 2}
 .fg.s3{grid-column:span 3}
-.fg.s4{grid-column:span 4}
 label{font-size:11px;font-weight:600;color:var(--grey5);text-transform:uppercase;letter-spacing:.5px}
 label .req{color:var(--danger);margin-left:2px}
 input,select,textarea{font-size:13px;font-family:'DM Sans',sans-serif;padding:9px 12px;border:0.5px solid var(--grey3);border-radius:var(--radius);color:var(--text);background:var(--white);width:100%;outline:none;transition:.15s}
@@ -89,136 +69,96 @@ textarea{resize:vertical;min-height:64px}
 .err{font-size:11px;color:var(--danger);margin-top:3px;display:none}
 .err.show{display:block}
 input.invalid,select.invalid{border-color:var(--danger)}
-
-/* BUTTONS */
-.btn{padding:9px 20px;border-radius:var(--radius);font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;transition:.15s;display:inline-flex;align-items:center;gap:6px;letter-spacing:.2px}
+.btn{padding:9px 20px;border-radius:var(--radius);font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;transition:.15s;display:inline-flex;align-items:center;gap:6px}
 .btn:active{transform:scale(.98)}
 .btn-primary{background:var(--navy);color:white}
 .btn-primary:hover{background:var(--navy3)}
 .btn-ghost{background:var(--white);color:var(--text2);border:0.5px solid var(--grey3)}
 .btn-ghost:hover{background:var(--grey1)}
 .btn-success{background:var(--success);color:white}
-.btn-success:hover{background:#156b3f}
 .btn-danger{background:var(--danger);color:white}
-.btn-danger:hover{background:#a93226}
-.btn-accent{background:var(--accent);color:white}
-.btn-accent:hover{background:var(--accent2)}
 .btn-sm{padding:6px 14px;font-size:12px}
 .btn-add{width:100%;margin-top:12px;background:none;border:1.5px dashed var(--grey3);border-radius:var(--radius);padding:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--accent);cursor:pointer;transition:.15s;font-weight:500}
 .btn-add:hover{border-color:var(--accent);background:#f0f6ff}
 .arow{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
 .arow.space{justify-content:space-between}
-
-/* LINE ITEM CARDS */
 .licard{background:var(--grey1);border:0.5px solid var(--grey2);border-radius:var(--radius);padding:18px 18px 14px;margin-bottom:12px;position:relative}
 .li-num{font-size:10px;font-weight:700;color:var(--grey4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;font-family:'DM Mono',monospace}
 .li-del{position:absolute;top:12px;right:12px;background:none;border:none;cursor:pointer;color:var(--grey4);font-size:18px;line-height:1;padding:2px 6px;border-radius:4px;transition:.15s}
 .li-del:hover{color:var(--danger);background:var(--dangerbg)}
-
-/* BADGES */
-.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.3px}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
 .b-pending{background:var(--pendingbg);color:var(--pending)}
 .b-approved{background:var(--successbg);color:var(--success)}
 .b-rejected{background:var(--dangerbg);color:var(--danger)}
 .b-draft{background:var(--grey2);color:var(--grey4)}
-
-/* TABLE */
-.tbl-wrap{overflow-x:auto;border-radius:var(--radius)}
+.tbl-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{background:var(--grey1);padding:10px 14px;text-align:left;font-weight:600;font-size:11px;color:var(--grey5);border-bottom:0.5px solid var(--grey3);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
 td{padding:11px 14px;border-bottom:0.5px solid var(--grey2);color:var(--text);vertical-align:middle}
 tr:last-child td{border-bottom:none}
-.trow{cursor:pointer;transition:.1s}
+.trow{cursor:pointer}
 .trow:hover td{background:#f8fafd}
-
-/* REVIEW GRID */
 .rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:4px}
 .rfield{background:var(--grey1);border-radius:var(--radius);padding:12px 14px}
 .rlabel{font-size:10px;font-weight:700;color:var(--grey4);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
 .rval{font-size:13px;font-weight:500;color:var(--text)}
-
-/* CONFIRM */
 .confirm-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px;text-align:center}
-.confirm-ring{width:72px;height:72px;border-radius:50%;background:var(--successbg);border:2px solid var(--success);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:30px}
+.confirm-ring{width:72px;height:72px;border-radius:50%;background:var(--successbg);border:2px solid var(--success);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px}
 .confirm-num{font-size:24px;font-weight:700;color:var(--navy);margin-bottom:6px;font-family:'DM Mono',monospace}
 .confirm-msg{font-size:14px;color:var(--grey4);margin-bottom:32px;line-height:1.7;max-width:380px}
-
-/* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(10,20,35,.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(10,20,35,.5);z-index:200;align-items:center;justify-content:center}
 .overlay.open{display:flex}
 .modal{background:var(--white);border-radius:var(--radius2);width:820px;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow2)}
-.modal-top{padding:24px 28px 0;position:sticky;top:0;background:var(--white);z-index:2;border-bottom:0.5px solid var(--grey2);padding-bottom:16px;margin-bottom:24px}
-.modal-body{padding:0 28px 28px}
-.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--grey4);line-height:1;padding:4px 8px;border-radius:4px}
+.modal-top{padding:24px 28px 16px;border-bottom:0.5px solid var(--grey2);margin-bottom:0}
+.modal-body{padding:24px 28px 28px}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--grey4);padding:4px 8px;border-radius:4px}
 .modal-close:hover{color:var(--text);background:var(--grey2)}
-
-/* TOAST */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:white;padding:12px 20px;border-radius:var(--radius);font-size:13px;font-weight:500;box-shadow:var(--shadow2);z-index:999;transform:translateY(80px);opacity:0;transition:.3s;max-width:320px}
 .toast.show{transform:translateY(0);opacity:1}
 .toast.success{background:var(--success)}
 .toast.error{background:var(--danger)}
-
-/* LOADING */
-.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-overlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,.7);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:12px;backdrop-filter:blur(1px)}
+.toast.warn{background:var(--warn)}
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,.8);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:12px}
 .loading-overlay.show{display:flex}
 .loading-spinner{width:36px;height:36px;border:3px solid var(--grey3);border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite}
 .loading-text{font-size:13px;color:var(--grey4);font-weight:500}
-
-/* EMPTY */
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
 .empty{text-align:center;padding:56px 24px}
-.empty-icon{font-size:36px;margin-bottom:12px;opacity:.4}
+.empty-icon{font-size:32px;margin-bottom:10px;opacity:.5}
 .empty-txt{font-size:14px;color:var(--grey4)}
-
-/* SCREEN */
 .screen{display:none}
 .screen.active{display:block}
-
-/* COMMENT */
-textarea.comment{min-height:72px;font-size:13px}
-
-/* AUTH SCREEN */
 .auth-wrap{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 56px);padding:24px}
-.auth-card{background:var(--white);border:0.5px solid var(--grey3);border-radius:var(--radius2);padding:40px;width:420px;box-shadow:var(--shadow2);text-align:center}
-.auth-logo{width:48px;height:48px;background:var(--navy);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
-.auth-logo svg{width:26px;height:26px;fill:white}
+.auth-card{background:var(--white);border:0.5px solid var(--grey3);border-radius:var(--radius2);padding:40px;width:440px;box-shadow:var(--shadow2);text-align:center}
+.auth-logo{width:52px;height:52px;background:var(--navy);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:22px}
 .auth-title{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px}
 .auth-sub{font-size:13px;color:var(--grey4);margin-bottom:28px;line-height:1.6}
 .auth-warn{background:var(--warnbg);border:0.5px solid #fcd34d;border-radius:var(--radius);padding:12px 14px;font-size:12px;color:var(--warn);margin-top:14px;text-align:left;line-height:1.6}
-
-/* NOTIFICATION DOT */
-.ndot{width:7px;height:7px;background:#ef4444;border-radius:50%;display:inline-block;margin-left:4px;vertical-align:middle}
+.auth-err{background:var(--dangerbg);border:0.5px solid #fca5a5;border-radius:var(--radius);padding:12px 14px;font-size:12px;color:var(--danger);margin-top:14px;text-align:left;display:none}
+.auth-err.show{display:block}
+.section-label{font-size:11px;font-weight:700;color:var(--grey5);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px}
 </style>
 </head>
 <body>
 
-<!-- LOADING OVERLAY -->
 <div class="loading-overlay" id="loading-overlay">
   <div class="loading-spinner"></div>
   <div class="loading-text" id="loading-text">Loading...</div>
 </div>
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- TOPBAR -->
 <div class="topbar">
   <div class="topbar-brand">
-    <div class="brand-mark">
-      <svg viewBox="0 0 16 16"><path d="M8 1L1 5v6l7 4 7-4V5L8 1zm0 2.2L13 6v4l-5 2.8L3 10V6l5-2.8z"/></svg>
-    </div>
+    <div class="brand-mark">E</div>
     <div class="brand-name">Envision Energy</div>
     <div class="brand-div"></div>
     <div class="brand-sub">PR Tracker</div>
   </div>
   <div class="topbar-nav" id="main-nav" style="display:none">
-    <button class="tnav active" onclick="goScreen('home')" id="nav-new">
-      <svg class="tnav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2a1 1 0 011 1v4h4a1 1 0 010 2H9v4a1 1 0 01-2 0V9H3a1 1 0 010-2h4V3a1 1 0 011-1z"/></svg>
-      New PR
-    </button>
-    <button class="tnav" onclick="goScreen('myrequests')" id="nav-mine">My Requests</button>
-    <button class="tnav" onclick="toggleApprover()" id="nav-approver">Approver View</button>
+    <button class="tnav active" id="nav-new" onclick="goScreen('home')">+ New PR</button>
+    <button class="tnav" id="nav-mine" onclick="goScreen('myrequests')">My Requests</button>
+    <button class="tnav" id="nav-approver" onclick="toggleApprover()">Approver View</button>
   </div>
   <div class="topbar-right">
     <div class="user-pill" id="user-pill" style="display:none">
@@ -228,113 +168,66 @@ textarea.comment{min-height:72px;font-size:13px}
   </div>
 </div>
 
-<!-- APPROVER BAR -->
 <div class="approver-bar" id="approver-bar">
-  <span>&#9654; Approver mode active — you are reviewing purchase requests</span>
-  <button class="btn btn-sm btn-ghost" style="color:#fef3c7;border-color:rgba(255,255,255,.2)" onclick="toggleApprover()">Exit Approver Mode</button>
+  <span>&#9654; Approver mode — reviewing all purchase requests</span>
+  <button class="btn btn-sm btn-ghost" style="color:#fef3c7;border-color:rgba(255,255,255,.25)" onclick="toggleApprover()">Exit</button>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SCREEN: AUTH
-════════════════════════════════════════ -->
+<!-- AUTH SCREEN -->
 <div class="screen active" id="screen-auth">
   <div class="auth-wrap">
     <div class="auth-card">
-      <div class="auth-logo">
-        <svg viewBox="0 0 26 26"><path d="M13 2L2 8v10l11 6 11-6V8L13 2zm0 3l8 4.4V16L13 20.4 5 16V9.4L13 5z"/></svg>
-      </div>
+      <div class="auth-logo">&#9671;</div>
       <div class="auth-title">PR Tracker</div>
-      <div class="auth-sub">Sign in with your Envision Energy Microsoft account to access the Purchase Request system.</div>
-      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="signIn()">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="white"><path d="M7.5 1h-6A.5.5 0 001 1.5v6a.5.5 0 00.5.5h6a.5.5 0 00.5-.5v-6a.5.5 0 00-.5-.5zm0 7.5h-6a.5.5 0 00-.5.5v6a.5.5 0 00.5.5h6a.5.5 0 00.5-.5V9a.5.5 0 00-.5-.5zm7-7.5h-6a.5.5 0 00-.5.5v6a.5.5 0 00.5.5h6a.5.5 0 00.5-.5v-6a.5.5 0 00-.5-.5zm0 7.5h-6a.5.5 0 00-.5.5v6a.5.5 0 00.5.5h6a.5.5 0 00.5-.5V9a.5.5 0 00-.5-.5z"/></svg>
+      <div class="auth-sub">Sign in with your Envision Energy Microsoft account to submit and manage purchase requests.</div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:14px;padding:11px 20px" onclick="signIn()" id="signin-btn">
         Sign in with Microsoft
       </button>
-      <div class="auth-warn">Only accounts ending in <strong>@envision-energy.com</strong> are permitted to access this application.</div>
+      <div class="auth-err" id="auth-err"></div>
+      <div class="auth-warn">Only <strong>@envision-energy.com</strong> accounts are permitted to access this application.</div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SCREEN: CREATE PR HEADER
-════════════════════════════════════════ -->
+<!-- CREATE PR HEADER -->
 <div class="screen" id="screen-home">
   <div class="main">
-    <div class="page-hdr">
-      <div class="page-title">Create Purchase Request</div>
-      <div class="page-sub">Complete all required fields. Fields marked * are mandatory.</div>
-    </div>
+    <div class="page-hdr"><div class="page-title">Create Purchase Request</div><div class="page-sub">All fields marked * are required.</div></div>
     <div class="stepbar">
-      <div class="step active" id="s1"><div class="sdot">1</div>Header Details</div>
-      <div class="sline" id="sl1"></div>
-      <div class="step" id="s2"><div class="sdot">2</div>Line Items</div>
-      <div class="sline" id="sl2"></div>
-      <div class="step" id="s3"><div class="sdot">3</div>Review</div>
-      <div class="sline" id="sl3"></div>
-      <div class="step" id="s4"><div class="sdot">4</div>Submit</div>
+      <div class="step active"><div class="sdot">1</div>Header Details</div>
+      <div class="sline"></div>
+      <div class="step"><div class="sdot">2</div>Line Items</div>
+      <div class="sline"></div>
+      <div class="step"><div class="sdot">3</div>Review</div>
+      <div class="sline"></div>
+      <div class="step"><div class="sdot">4</div>Submit</div>
     </div>
     <div class="card">
       <div class="card-hdr">Request Header</div>
       <div class="fgrid g3">
-        <div class="fg">
-          <label>Request Number</label>
-          <input type="text" id="h-reqnum" readonly value="Auto-generated on submit"/>
-        </div>
-        <div class="fg">
-          <label>Request Submit Date <span class="req">*</span></label>
-          <input type="date" id="h-date"/>
-        </div>
-        <div class="fg">
-          <label>State <span class="req">*</span></label>
-          <input type="text" id="h-state" placeholder="e.g. Maharashtra"/>
-          <span class="err" id="e-state">State is required</span>
-        </div>
-        <div class="fg">
-          <label>P-Code <span class="req">*</span></label>
-          <select id="h-pcode">
-            <option value="">Select P-Code</option>
-            <option>P-01</option><option>P-02</option><option>P-03</option>
-            <option>P-04</option><option>P-05</option>
-          </select>
-          <span class="err" id="e-pcode">P-Code is required</span>
-        </div>
-        <div class="fg">
-          <label>Site Name <span class="req">*</span></label>
-          <select id="h-site">
-            <option value="">Select Site</option>
-            <option>Site A</option><option>Site B</option><option>Site C</option>
-            <option>Site D</option><option>Site E</option>
-          </select>
-          <span class="err" id="e-site">Site is required</span>
-        </div>
-        <div class="fg">
-          <label>Site Manager Name <span class="req">*</span></label>
-          <input type="text" id="h-mgr" placeholder="Full name"/>
-          <span class="err" id="e-mgr">Manager name is required</span>
-        </div>
-        <div class="fg s2">
-          <label>Site Manager Email <span class="req">*</span></label>
-          <input type="email" id="h-email" placeholder="manager@envision-energy.com"/>
-          <span class="err" id="e-email">Must be a valid @envision-energy.com address</span>
-        </div>
+        <div class="fg"><label>Request Number</label><input type="text" id="h-reqnum" readonly value="Auto-generated"/></div>
+        <div class="fg"><label>Submit Date <span class="req">*</span></label><input type="date" id="h-date"/></div>
+        <div class="fg"><label>State <span class="req">*</span></label><input type="text" id="h-state" placeholder="e.g. Maharashtra"/><span class="err" id="e-state">Required</span></div>
+        <div class="fg"><label>P-Code <span class="req">*</span></label>
+          <select id="h-pcode"><option value="">Select P-Code</option><option>P-01</option><option>P-02</option><option>P-03</option><option>P-04</option><option>P-05</option></select>
+          <span class="err" id="e-pcode">Required</span></div>
+        <div class="fg"><label>Site Name <span class="req">*</span></label>
+          <select id="h-site"><option value="">Select Site</option><option>Site A</option><option>Site B</option><option>Site C</option><option>Site D</option><option>Site E</option></select>
+          <span class="err" id="e-site">Required</span></div>
+        <div class="fg"><label>Site Manager Name <span class="req">*</span></label><input type="text" id="h-mgr" placeholder="Full name"/><span class="err" id="e-mgr">Required</span></div>
+        <div class="fg s2"><label>Site Manager Email <span class="req">*</span></label><input type="email" id="h-email" placeholder="manager@envision-energy.com"/><span class="err" id="e-email">Must be @envision-energy.com</span></div>
       </div>
     </div>
-    <div class="arow">
-      <button class="btn btn-primary" onclick="validateHeader()">Next: Add Line Items &rarr;</button>
-    </div>
+    <div class="arow"><button class="btn btn-primary" onclick="validateHeader()">Next: Add Line Items &rarr;</button></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SCREEN: LINE ITEMS
-════════════════════════════════════════ -->
+<!-- LINE ITEMS -->
 <div class="screen" id="screen-lineitems">
   <div class="main">
-    <div class="page-hdr">
-      <div class="page-title">Line Items</div>
-      <div class="page-sub">Add at least one line item. Use "+ Add Line Item" to add more.</div>
-    </div>
+    <div class="page-hdr"><div class="page-title">Line Items</div><div class="page-sub">Add at least one line item.</div></div>
     <div class="stepbar">
-      <div class="step done"><div class="sdot">✓</div>Header Details</div>
+      <div class="step done"><div class="sdot">&#10003;</div>Header Details</div>
       <div class="sline done"></div>
       <div class="step active"><div class="sdot">2</div>Line Items</div>
       <div class="sline"></div>
@@ -343,12 +236,10 @@ textarea.comment{min-height:72px;font-size:13px}
       <div class="step"><div class="sdot">4</div>Submit</div>
     </div>
     <div class="card">
-      <div class="card-hdr">
-        <span>Line Items <span id="li-count" style="font-weight:400;color:var(--grey4);text-transform:none;letter-spacing:0;font-size:12px"></span></span>
-      </div>
+      <div class="card-hdr">Line Items <span id="li-count" style="font-weight:400;color:var(--grey4);text-transform:none;letter-spacing:0;font-size:12px"></span></div>
       <div id="li-container"></div>
       <button class="btn-add" onclick="addLineItem()">+ Add Line Item</button>
-      <span class="err" id="e-items" style="margin-top:10px">Please add at least one line item before proceeding.</span>
+      <span class="err" id="e-items" style="margin-top:10px">Please add at least one line item.</span>
     </div>
     <div class="arow space">
       <button class="btn btn-ghost" onclick="goScreen('home')">&larr; Back</button>
@@ -357,39 +248,23 @@ textarea.comment{min-height:72px;font-size:13px}
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SCREEN: REVIEW
-════════════════════════════════════════ -->
+<!-- REVIEW -->
 <div class="screen" id="screen-review">
   <div class="main">
-    <div class="page-hdr">
-      <div class="page-title">Review & Submit</div>
-      <div class="page-sub">Verify all details before final submission.</div>
-    </div>
+    <div class="page-hdr"><div class="page-title">Review &amp; Submit</div><div class="page-sub">Verify all details before submitting.</div></div>
     <div class="stepbar">
-      <div class="step done"><div class="sdot">✓</div>Header Details</div>
+      <div class="step done"><div class="sdot">&#10003;</div>Header Details</div>
       <div class="sline done"></div>
-      <div class="step done"><div class="sdot">✓</div>Line Items</div>
+      <div class="step done"><div class="sdot">&#10003;</div>Line Items</div>
       <div class="sline done"></div>
       <div class="step active"><div class="sdot">3</div>Review</div>
       <div class="sline"></div>
       <div class="step"><div class="sdot">4</div>Submit</div>
     </div>
-    <div class="card">
-      <div class="card-hdr">Request Header</div>
-      <div class="rgrid" id="review-hdr"></div>
-    </div>
+    <div class="card"><div class="card-hdr">Request Header</div><div class="rgrid" id="review-hdr"></div></div>
     <div class="card">
       <div class="card-hdr">Line Items</div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr>
-            <th>#</th><th>Category</th><th>Description</th><th>Specification</th>
-            <th>Qty</th><th>UOM</th><th>Start Date</th><th>End Date</th>
-          </tr></thead>
-          <tbody id="review-tbody"></tbody>
-        </table>
-      </div>
+      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Category</th><th>Description</th><th>Specification</th><th>Qty</th><th>UOM</th><th>Start Date</th><th>End Date</th></tr></thead><tbody id="review-tbody"></tbody></table></div>
     </div>
     <div class="arow space">
       <button class="btn btn-ghost" onclick="goScreen('lineitems')">&larr; Back</button>
@@ -398,15 +273,13 @@ textarea.comment{min-height:72px;font-size:13px}
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SCREEN: CONFIRMATION
-════════════════════════════════════════ -->
+<!-- CONFIRMATION -->
 <div class="screen" id="screen-confirm">
   <div class="main">
     <div class="confirm-wrap">
-      <div class="confirm-ring">✓</div>
+      <div class="confirm-ring">&#10003;</div>
       <div class="confirm-num" id="confirm-num">ENV-2026-0001</div>
-      <div class="confirm-msg">Your purchase request has been submitted successfully and saved to SharePoint. The approver will be notified and you can track the status under <strong>My Requests</strong>.</div>
+      <div class="confirm-msg">Purchase request submitted successfully. The approver will review your request and you will be notified of the decision.</div>
       <div style="display:flex;gap:12px">
         <button class="btn btn-primary" onclick="newPR()">+ Create New PR</button>
         <button class="btn btn-ghost" onclick="goScreen('myrequests')">View My Requests</button>
@@ -415,91 +288,59 @@ textarea.comment{min-height:72px;font-size:13px}
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SCREEN: MY REQUESTS
-════════════════════════════════════════ -->
+<!-- MY REQUESTS -->
 <div class="screen" id="screen-myrequests">
   <div class="main">
-    <div class="page-hdr">
-      <div class="page-title">My Requests</div>
-      <div class="page-sub">All purchase requests submitted by you.</div>
-    </div>
+    <div class="page-hdr"><div class="page-title">My Requests</div><div class="page-sub">All purchase requests submitted by you.</div></div>
     <div class="card" style="padding:0">
       <div class="tbl-wrap">
-        <table>
-          <thead><tr>
-            <th>Request #</th><th>Site</th><th>P-Code</th><th>State</th>
-            <th>Submit Date</th><th>Items</th><th>Status</th><th></th>
-          </tr></thead>
-          <tbody id="my-tbody">
-            <tr><td colspan="8"><div class="empty"><div class="empty-icon">&#128193;</div><div class="empty-txt">Loading your requests...</div></div></td></tr>
-          </tbody>
-        </table>
+        <table><thead><tr><th>Request #</th><th>Site</th><th>P-Code</th><th>State</th><th>Date</th><th>Status</th><th>Comment</th><th></th></tr></thead>
+        <tbody id="my-tbody"><tr><td colspan="8"><div class="empty"><div class="empty-icon">&#8987;</div><div class="empty-txt">Loading...</div></div></td></tr></tbody></table>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SCREEN: APPROVALS QUEUE
-════════════════════════════════════════ -->
+<!-- APPROVALS -->
 <div class="screen" id="screen-approvals">
   <div class="main">
-    <div class="page-hdr">
-      <div class="page-title">Approvals Queue</div>
-      <div class="page-sub">All purchase requests pending your review.</div>
-    </div>
+    <div class="page-hdr"><div class="page-title">Approvals Queue</div><div class="page-sub">All purchase requests awaiting review.</div></div>
     <div class="card" style="padding:0">
       <div class="tbl-wrap">
-        <table>
-          <thead><tr>
-            <th>Request #</th><th>Submitted By</th><th>Site</th><th>P-Code</th>
-            <th>Submit Date</th><th>Items</th><th>Status</th><th></th>
-          </tr></thead>
-          <tbody id="approvals-tbody">
-            <tr><td colspan="8"><div class="empty"><div class="empty-icon">&#128203;</div><div class="empty-txt">Loading approval queue...</div></div></td></tr>
-          </tbody>
-        </table>
+        <table><thead><tr><th>Request #</th><th>Submitted By</th><th>Site</th><th>P-Code</th><th>Date</th><th>Status</th><th></th></tr></thead>
+        <tbody id="approvals-tbody"><tr><td colspan="7"><div class="empty"><div class="empty-icon">&#8987;</div><div class="empty-txt">Loading...</div></div></td></tr></tbody></table>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     MODAL: PR DETAIL VIEW
-════════════════════════════════════════ -->
+<!-- DETAIL MODAL -->
 <div class="overlay" id="detail-overlay">
   <div class="modal">
     <div class="modal-top">
       <div style="display:flex;justify-content:space-between;align-items:flex-start">
         <div>
-          <div style="font-size:18px;font-weight:700;color:var(--navy);font-family:'DM Mono',monospace" id="modal-reqnum">—</div>
+          <div style="font-size:17px;font-weight:700;color:var(--navy);font-family:'DM Mono',monospace" id="modal-reqnum">—</div>
           <div style="margin-top:6px" id="modal-badge"></div>
         </div>
         <button class="modal-close" onclick="closeModal()">&#10005;</button>
       </div>
     </div>
     <div class="modal-body">
-      <div style="font-size:11px;font-weight:700;color:var(--grey5);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px">Header Details</div>
-      <div class="rgrid" id="modal-hdr-grid"></div>
-      <div style="font-size:11px;font-weight:700;color:var(--grey5);text-transform:uppercase;letter-spacing:.6px;margin:20px 0 12px">Line Items</div>
+      <div class="section-label">Header Details</div>
+      <div class="rgrid" id="modal-hdr-grid" style="margin-bottom:20px"></div>
+      <div class="section-label">Line Items</div>
       <div class="tbl-wrap" style="margin-bottom:20px">
-        <table>
-          <thead><tr>
-            <th>#</th><th>Category</th><th>Description</th><th>Specification</th>
-            <th>Qty</th><th>UOM</th><th>Start</th><th>End</th>
-          </tr></thead>
-          <tbody id="modal-li-tbody"></tbody>
-        </table>
+        <table><thead><tr><th>#</th><th>Category</th><th>Description</th><th>Specification</th><th>Qty</th><th>UOM</th><th>Start</th><th>End</th></tr></thead>
+        <tbody id="modal-li-tbody"></tbody></table>
       </div>
-      <!-- Approver decision section -->
       <div id="approver-decision" style="display:none">
         <div style="height:0.5px;background:var(--grey2);margin-bottom:20px"></div>
-        <div style="font-size:11px;font-weight:700;color:var(--grey5);text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px">Approver Decision</div>
+        <div class="section-label">Approver Decision</div>
         <div class="fg" style="margin-bottom:16px">
           <label>Comment <span class="req">*</span></label>
-          <textarea class="comment" id="modal-comment" placeholder="Add your review comment. Comment is required when rejecting."></textarea>
-          <span class="err" id="e-comment">A comment is required when rejecting.</span>
+          <textarea id="modal-comment" placeholder="Add your review comment. Required when rejecting." style="min-height:72px"></textarea>
+          <span class="err" id="e-comment">Comment is required when rejecting.</span>
         </div>
         <div style="display:flex;gap:10px;justify-content:flex-end">
           <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
@@ -507,11 +348,9 @@ textarea.comment{min-height:72px;font-size:13px}
           <button class="btn btn-success" onclick="makeDecision('Approved')">Approve</button>
         </div>
       </div>
-      <!-- Decision done -->
       <div id="decision-done" style="display:none;padding:14px;border-radius:var(--radius);margin-top:8px;font-size:13px;font-weight:500"></div>
-      <!-- Comment display (read-only) -->
       <div id="comment-display" style="display:none;margin-top:16px">
-        <div style="font-size:11px;font-weight:700;color:var(--grey5);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">Approver Comment</div>
+        <div class="section-label">Approver Comment</div>
         <div style="background:var(--grey1);border:0.5px solid var(--grey2);border-radius:var(--radius);padding:12px 14px;font-size:13px;color:var(--text2)" id="comment-text"></div>
       </div>
     </div>
@@ -519,652 +358,524 @@ textarea.comment{min-height:72px;font-size:13px}
 </div>
 
 <script>
-// ══════════════════════════════════════
-// CONFIG — UPDATE THESE VALUES
-// ══════════════════════════════════════
-const CONFIG = {
-  siteUrl: 'https://envisionint-my.sharepoint.com/personal/nandit_naveen_envision-energy_com',
-  headersListName: 'PR_Headers',
-  itemsListName: 'PR_LineItems',
-  allowedDomain: '@envision-energy.com',
-  // Column mappings — match exact SharePoint internal names
-  hCols: {
-    reqNum: 'Title',
-    state: 'State',
-    pcode: 'PCode',
-    date: 'RequestDate',
-    site: 'SiteName',
-    mgr: 'ManagerName',
-    email: 'ManagerEmail',
-    status: 'Status',
-    submittedBy: 'SubmittedBy',
-    approverComment: 'ApproverComment'
-  },
-  liCols: {
-    reqNum: 'Title',
-    category: 'Category',
-    description: 'Description',
-    specification: 'Specification',
-    qty: 'Quantity',
-    uom: 'UOM',
-    startDate: 'ServiceStartDate',
-    endDate: 'ServiceEndDate'
-  }
+// ══════════════════════════════════════════════════════
+// CONFIG — matches your SharePoint lists exactly
+// ══════════════════════════════════════════════════════
+const SP = {
+  site: 'https://envisionint-my.sharepoint.com/personal/nandit_naveen_envision-energy_com',
+  headersList: 'PR_Headers',
+  itemsList: 'PR_LineItems',
+  domain: '@envision-energy.com'
 };
 
-// ══════════════════════════════════════
-// STATE
-// ══════════════════════════════════════
+// SharePoint column internal names — must match exactly
+const HC = {
+  title:'Title', state:'State', pcode:'PCode', date:'RequestDate',
+  site:'SiteName', mgr:'ManagerName', email:'ManagerEmail',
+  status:'Status', submittedBy:'SubmittedBy', comment:'ApproverComment'
+};
+const LC = {
+  reqNum:'Title', cat:'Category', desc:'Description', spec:'Specification',
+  qty:'Quantity', uom:'UOM', start:'ServiceStartDate', end:'ServiceEndDate'
+};
+
+// ══════════════════════════════════════════════════════
+// APP STATE
+// ══════════════════════════════════════════════════════
 const APP = {
   user: null,
   isApprover: false,
-  currentPR: { header: {}, items: [] },
-  activeModalPR: null,
-  prCounter: 0
+  demo: false,
+  demoStore: [],
+  demoCounter: 0,
+  current: { header:{}, items:[] },
+  activeModal: null
 };
 
-// ══════════════════════════════════════
-// MSAL / AUTH (MSAL via CDN)
-// Uses implicit flow compatible with SharePoint personal sites
-// ══════════════════════════════════════
-let msalInstance = null;
+const CATS = ['General','Equipment','Services','Materials','IT & Software','Civil Works','Consumables','Spare Parts'];
+const UOMS = ['Nos','Kg','Ltr','Hours','Days','Months','Sets','Meters','Sq.Mt','MT'];
 
-function initMSAL() {
-  // MSAL is loaded from CDN below
-  // For Option B (SharePoint REST + cookie auth), we use fetch with credentials
-  // This works when app is hosted ON SharePoint or opened by an authenticated user
-  checkExistingAuth();
-}
-
-async function checkExistingAuth() {
-  // Try to get current user via SharePoint REST API
-  // This works if user is already logged in to SharePoint in the same browser
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+window.addEventListener('load', async () => {
+  // Check if returning from SP login (hash token) or already authed
+  showLoad('Checking authentication...');
   try {
-    const res = await spFetch(`${CONFIG.siteUrl}/_api/web/currentuser?$select=Title,Email`, 'GET');
-    if (res && res.d) {
-      const email = res.d.Email || '';
-      if (email.toLowerCase().endsWith(CONFIG.allowedDomain)) {
-        APP.user = { name: res.d.Title, email: email };
-        onAuthSuccess();
-      } else {
-        showAuthError(`Access denied. Only ${CONFIG.allowedDomain} accounts are permitted.`);
-      }
-    } else {
-      // Not authenticated — show sign in screen
-      goScreen('auth');
+    const res = await spGET(`${SP.site}/_api/web/currentuser?$select=Title,Email`);
+    const email = (res.d.Email || '').toLowerCase();
+    if (!email.endsWith(SP.domain)) {
+      hideLoad();
+      showAuthErr(`Access denied. Only ${SP.domain} accounts are permitted.`);
+      return;
     }
-  } catch (e) {
-    // If running locally (file://) or not on SharePoint, use demo mode
-    console.warn('SharePoint auth check failed, enabling demo mode:', e);
-    enableDemoMode();
+    APP.user = { name: res.d.Title, email: res.d.Email };
+    onLogin();
+  } catch(e) {
+    hideLoad();
+    // Not authenticated OR running outside SharePoint — show login screen
+    goScreen('auth');
   }
-}
+});
 
-function enableDemoMode() {
-  APP.user = { name: 'Nandit Naveen', email: 'nandit.naveen@envision-energy.com' };
-  APP.demoMode = true;
-  APP.demoData = [];
-  onAuthSuccess();
-  showToast('Running in demo mode — SharePoint not connected', 'warn');
-}
-
-async function signIn() {
-  showLoading('Signing in...');
-  // Redirect to SharePoint login, which handles Microsoft SSO
-  window.location.href = `${CONFIG.siteUrl}/_layouts/15/authenticate.aspx?Source=${encodeURIComponent(window.location.href)}`;
-}
-
-function onAuthSuccess() {
-  const email = APP.user.email;
-  const initials = email.split('@')[0].split('.').map(p => p[0].toUpperCase()).join('').slice(0, 2);
-  document.getElementById('user-avatar').textContent = initials;
-  document.getElementById('user-email-display').textContent = email.split('@')[0];
+function onLogin() {
+  const e = APP.user.email;
+  const ini = e.split('@')[0].split('.').map(x=>x[0].toUpperCase()).join('').slice(0,2);
+  document.getElementById('user-avatar').textContent = ini;
+  document.getElementById('user-email-display').textContent = e.split('@')[0];
   document.getElementById('user-pill').style.display = 'flex';
   document.getElementById('main-nav').style.display = 'flex';
-  hideLoading();
+  document.getElementById('h-date').value = todayISO();
+  hideLoad();
   goScreen('home');
-  setDate();
+  showToast('Signed in as ' + e, 'success');
 }
 
-function showAuthError(msg) {
-  hideLoading();
-  const wrap = document.querySelector('.auth-wrap');
-  const warn = document.querySelector('.auth-warn');
-  if (warn) warn.textContent = msg;
+// ══════════════════════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════════════════════
+function signIn() {
+  // Redirect to SharePoint — it handles Microsoft SSO and returns user here
+  const returnUrl = encodeURIComponent(window.location.href);
+  window.location.href = `${SP.site}/_layouts/15/authenticate.aspx?Source=${returnUrl}`;
 }
 
-// ══════════════════════════════════════
-// SHAREPOINT REST API HELPERS
-// ══════════════════════════════════════
-async function spFetch(url, method, body) {
-  const headers = {
-    'Accept': 'application/json;odata=verbose',
-    'Content-Type': 'application/json;odata=verbose'
-  };
-  if (method !== 'GET') {
-    const digest = await getRequestDigest();
-    headers['X-RequestDigest'] = digest;
-    if (method === 'PATCH' || method === 'DELETE') {
-      headers['IF-MATCH'] = '*';
-      headers['X-HTTP-Method'] = method;
-    }
-  }
-  const opts = { method: method === 'PATCH' || method === 'DELETE' ? 'POST' : method, headers, credentials: 'include' };
-  if (body) opts.body = JSON.stringify(body);
-  const res = await fetch(url, opts);
-  if (!res.ok) throw new Error(`SP API error: ${res.status} ${res.statusText}`);
-  const text = await res.text();
-  return text ? JSON.parse(text) : null;
+function showAuthErr(msg) {
+  const el = document.getElementById('auth-err');
+  el.textContent = msg; el.classList.add('show');
 }
 
-let _digest = null; let _digestExp = 0;
-async function getRequestDigest() {
-  if (_digest && Date.now() < _digestExp) return _digest;
-  const res = await fetch(`${CONFIG.siteUrl}/_api/contextinfo`, {
-    method: 'POST', headers: { 'Accept': 'application/json;odata=verbose' }, credentials: 'include'
+// ══════════════════════════════════════════════════════
+// SHAREPOINT REST HELPERS
+// ══════════════════════════════════════════════════════
+async function spGET(url) {
+  const r = await fetch(url, {
+    headers:{'Accept':'application/json;odata=verbose'},
+    credentials:'include'
   });
-  const data = await res.json();
-  _digest = data.d.GetContextWebInformation.FormDigestValue;
-  _digestExp = Date.now() + (data.d.GetContextWebInformation.FormDigestTimeoutSeconds - 60) * 1000;
-  return _digest;
+  if (!r.ok) throw new Error(`${r.status}`);
+  return r.json();
 }
 
-function listUrl(listName) {
-  return `${CONFIG.siteUrl}/_api/web/lists/getbytitle('${listName}')/items`;
+let _dig=null, _digExp=0;
+async function getDigest() {
+  if (_dig && Date.now() < _digExp) return _dig;
+  const r = await fetch(`${SP.site}/_api/contextinfo`, {
+    method:'POST',
+    headers:{'Accept':'application/json;odata=verbose'},
+    credentials:'include'
+  });
+  const d = await r.json();
+  _dig = d.d.GetContextWebInformation.FormDigestValue;
+  _digExp = Date.now() + (d.d.GetContextWebInformation.FormDigestTimeoutSeconds - 60)*1000;
+  return _dig;
 }
 
-// ══════════════════════════════════════
-// REQUEST NUMBER GENERATION
-// ══════════════════════════════════════
-async function generateReqNum() {
-  if (APP.demoMode) {
-    APP.prCounter++;
-    return `ENV-2026-${String(APP.prCounter).padStart(4, '0')}`;
-  }
+async function spPOST(url, body) {
+  const dig = await getDigest();
+  const r = await fetch(url, {
+    method:'POST',
+    headers:{
+      'Accept':'application/json;odata=verbose',
+      'Content-Type':'application/json;odata=verbose',
+      'X-RequestDigest': dig
+    },
+    credentials:'include',
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) { const t=await r.text(); throw new Error(t); }
+  const txt = await r.text();
+  return txt ? JSON.parse(txt) : null;
+}
+
+async function spPATCH(url, body) {
+  const dig = await getDigest();
+  const r = await fetch(url, {
+    method:'POST',
+    headers:{
+      'Accept':'application/json;odata=verbose',
+      'Content-Type':'application/json;odata=verbose',
+      'X-RequestDigest': dig,
+      'IF-MATCH':'*',
+      'X-HTTP-Method':'MERGE'
+    },
+    credentials:'include',
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) { const t=await r.text(); throw new Error(t); }
+}
+
+function listUrl(name) {
+  return `${SP.site}/_api/web/lists/getbytitle('${name}')/items`;
+}
+
+function listType(name) {
+  return `SP.Data.${name.replace(/_/g,'')}ListItem`;
+}
+
+// ══════════════════════════════════════════════════════
+// REQUEST NUMBER
+// ══════════════════════════════════════════════════════
+async function genReqNum() {
+  if (APP.demo) { APP.demoCounter++; return `ENV-2026-${String(APP.demoCounter).padStart(4,'0')}`; }
   try {
-    const res = await spFetch(`${listUrl(CONFIG.headersListName)}?$select=Id&$orderby=Id desc&$top=1`, 'GET');
-    const items = res.d.results;
-    const nextNum = items.length > 0 ? items[0].Id + 1 : 1;
-    return `ENV-2026-${String(nextNum).padStart(4, '0')}`;
-  } catch (e) {
-    APP.prCounter++;
-    return `ENV-2026-${String(APP.prCounter).padStart(4, '0')}`;
+    const r = await spGET(`${listUrl(SP.headersList)}?$select=Id&$orderby=Id desc&$top=1`);
+    const next = r.d.results.length > 0 ? r.d.results[0].Id + 1 : 1;
+    return `ENV-2026-${String(next).padStart(4,'0')}`;
+  } catch(e) {
+    APP.demoCounter++;
+    return `ENV-2026-${String(APP.demoCounter).padStart(4,'0')}`;
   }
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // WRITE TO SHAREPOINT
-// ══════════════════════════════════════
-async function writeHeader(reqNum, h) {
-  const payload = {
-    '__metadata': { 'type': `SP.Data.${CONFIG.headersListName.replace(/_/g,'')}ListItem` },
-    [CONFIG.hCols.reqNum]: reqNum,
-    [CONFIG.hCols.state]: h.state,
-    [CONFIG.hCols.pcode]: h.pcode,
-    [CONFIG.hCols.date]: h.date || new Date().toISOString(),
-    [CONFIG.hCols.site]: h.site,
-    [CONFIG.hCols.mgr]: h.mgr,
-    [CONFIG.hCols.email]: h.email,
-    [CONFIG.hCols.status]: 'Pending',
-    [CONFIG.hCols.submittedBy]: APP.user.email
-  };
-  return await spFetch(listUrl(CONFIG.headersListName), 'POST', payload);
+// ══════════════════════════════════════════════════════
+async function saveHeader(reqNum, h) {
+  return spPOST(listUrl(SP.headersList), {
+    '__metadata':{'type':listType(SP.headersList)},
+    [HC.title]: reqNum,
+    [HC.state]: h.state,
+    [HC.pcode]: h.pcode,
+    [HC.date]: h.date ? new Date(h.date).toISOString() : new Date().toISOString(),
+    [HC.site]: h.site,
+    [HC.mgr]: h.mgr,
+    [HC.email]: h.email,
+    [HC.status]: 'Pending',
+    [HC.submittedBy]: APP.user.email
+  });
 }
 
-async function writeLineItem(reqNum, item) {
-  const payload = {
-    '__metadata': { 'type': `SP.Data.${CONFIG.itemsListName.replace(/_/g,'')}ListItem` },
-    [CONFIG.liCols.reqNum]: reqNum,
-    [CONFIG.liCols.category]: item.cat,
-    [CONFIG.liCols.description]: item.desc,
-    [CONFIG.liCols.specification]: item.spec || '',
-    [CONFIG.liCols.qty]: parseFloat(item.qty) || 0,
-    [CONFIG.liCols.uom]: item.uom,
-    [CONFIG.liCols.startDate]: item.start || null,
-    [CONFIG.liCols.endDate]: item.end || null
-  };
-  return await spFetch(listUrl(CONFIG.itemsListName), 'POST', payload);
+async function saveLineItem(reqNum, it) {
+  return spPOST(listUrl(SP.itemsList), {
+    '__metadata':{'type':listType(SP.itemsList)},
+    [LC.reqNum]: reqNum,
+    [LC.cat]: it.cat,
+    [LC.desc]: it.desc,
+    [LC.spec]: it.spec || '',
+    [LC.qty]: parseFloat(it.qty)||0,
+    [LC.uom]: it.uom,
+    [LC.start]: it.start ? new Date(it.start).toISOString() : null,
+    [LC.end]: it.end ? new Date(it.end).toISOString() : null
+  });
 }
 
-async function updateStatus(itemId, status, comment) {
-  const payload = {
-    '__metadata': { 'type': `SP.Data.${CONFIG.headersListName.replace(/_/g,'')}ListItem` },
-    [CONFIG.hCols.status]: status,
-    [CONFIG.hCols.approverComment]: comment || ''
-  };
-  return await spFetch(`${listUrl(CONFIG.headersListName)}(${itemId})`, 'PATCH', payload);
+async function updatePR(id, status, comment) {
+  return spPATCH(`${listUrl(SP.headersList)}(${id})`, {
+    '__metadata':{'type':listType(SP.headersList)},
+    [HC.status]: status,
+    [HC.comment]: comment || ''
+  });
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // READ FROM SHAREPOINT
-// ══════════════════════════════════════
-async function fetchMyRequests() {
-  if (APP.demoMode) return APP.demoData;
-  const filter = `$filter=${CONFIG.hCols.submittedBy} eq '${APP.user.email}'`;
-  const res = await spFetch(`${listUrl(CONFIG.headersListName)}?${filter}&$orderby=Id desc`, 'GET');
-  return res.d.results;
+// ══════════════════════════════════════════════════════
+async function getMyPRs() {
+  if (APP.demo) return APP.demoStore.filter(p=>p[HC.submittedBy]===APP.user.email);
+  const r = await spGET(`${listUrl(SP.headersList)}?$filter=${HC.submittedBy} eq '${APP.user.email}'&$orderby=Id desc`);
+  return r.d.results;
 }
 
-async function fetchAllRequests() {
-  if (APP.demoMode) return APP.demoData;
-  const res = await spFetch(`${listUrl(CONFIG.headersListName)}?$orderby=Id desc`, 'GET');
-  return res.d.results;
+async function getAllPRs() {
+  if (APP.demo) return [...APP.demoStore];
+  const r = await spGET(`${listUrl(SP.headersList)}?$orderby=Id desc`);
+  return r.d.results;
 }
 
-async function fetchLineItems(reqNum) {
-  if (APP.demoMode) {
-    const pr = APP.demoData.find(p => p[CONFIG.hCols.reqNum] === reqNum);
-    return pr ? (pr._items || []) : [];
+async function getLineItems(reqNum) {
+  if (APP.demo) {
+    const pr = APP.demoStore.find(p=>p[HC.title]===reqNum);
+    return pr ? (pr._items||[]) : [];
   }
-  const filter = `$filter=${CONFIG.liCols.reqNum} eq '${reqNum}'`;
-  const res = await spFetch(`${listUrl(CONFIG.itemsListName)}?${filter}`, 'GET');
-  return res.d.results;
+  const r = await spGET(`${listUrl(SP.itemsList)}?$filter=${LC.reqNum} eq '${reqNum}'`);
+  return r.d.results;
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // NAVIGATION
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 function goScreen(s) {
-  document.querySelectorAll('.screen').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
   document.getElementById(`screen-${s}`).classList.add('active');
-  document.querySelectorAll('.tnav').forEach(x => x.classList.remove('active'));
-  if (s === 'home') document.getElementById('nav-new').classList.add('active');
-  if (s === 'myrequests') { document.getElementById('nav-mine').classList.add('active'); loadMyRequests(); }
-  if (s === 'approvals') loadApprovals();
+  document.querySelectorAll('.tnav').forEach(x=>x.classList.remove('active'));
+  if(s==='home') document.getElementById('nav-new').classList.add('active');
+  if(s==='myrequests'){document.getElementById('nav-mine').classList.add('active');loadMyRequests();}
+  if(s==='approvals') loadApprovals();
 }
 
 function toggleApprover() {
   APP.isApprover = !APP.isApprover;
-  const bar = document.getElementById('approver-bar');
-  const btn = document.getElementById('nav-approver');
-  bar.classList.toggle('show', APP.isApprover);
-  btn.textContent = APP.isApprover ? 'Exit Approver Mode' : 'Approver View';
-  if (APP.isApprover) goScreen('approvals');
-  else goScreen('home');
+  document.getElementById('approver-bar').classList.toggle('show', APP.isApprover);
+  document.getElementById('nav-approver').textContent = APP.isApprover ? 'Exit Approver Mode' : 'Approver View';
+  goScreen(APP.isApprover ? 'approvals' : 'home');
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // HEADER VALIDATION
-// ══════════════════════════════════════
-function setDate() {
-  const d = new Date();
-  document.getElementById('h-date').value = d.toISOString().split('T')[0];
-}
-
+// ══════════════════════════════════════════════════════
 function validateHeader() {
   let ok = true;
   const checks = [
-    { id: 'h-state', err: 'e-state', fn: v => v.trim() !== '' },
-    { id: 'h-pcode', err: 'e-pcode', fn: v => v !== '' },
-    { id: 'h-site', err: 'e-site', fn: v => v !== '' },
-    { id: 'h-mgr', err: 'e-mgr', fn: v => v.trim() !== '' },
-    { id: 'h-email', err: 'e-email', fn: v => v.trim() !== '' && v.toLowerCase().endsWith(CONFIG.allowedDomain) }
+    {id:'h-state', err:'e-state', fn:v=>v.trim()!==''},
+    {id:'h-pcode', err:'e-pcode', fn:v=>v!==''},
+    {id:'h-site',  err:'e-site',  fn:v=>v!==''},
+    {id:'h-mgr',   err:'e-mgr',   fn:v=>v.trim()!==''},
+    {id:'h-email', err:'e-email', fn:v=>v.trim()!==''&&v.toLowerCase().endsWith(SP.domain)}
   ];
-  checks.forEach(c => {
+  checks.forEach(c=>{
     const v = document.getElementById(c.id).value;
     const valid = c.fn(v);
-    document.getElementById(c.err).classList.toggle('show', !valid);
-    document.getElementById(c.id).classList.toggle('invalid', !valid);
-    if (!valid) ok = false;
+    document.getElementById(c.err).classList.toggle('show',!valid);
+    document.getElementById(c.id).classList.toggle('invalid',!valid);
+    if(!valid) ok=false;
   });
-  if (!ok) return;
-  APP.currentPR.header = {
+  if(!ok) return;
+  APP.current.header = {
     state: document.getElementById('h-state').value,
     pcode: document.getElementById('h-pcode').value,
-    date: document.getElementById('h-date').value,
-    site: document.getElementById('h-site').value,
-    mgr: document.getElementById('h-mgr').value,
+    date:  document.getElementById('h-date').value,
+    site:  document.getElementById('h-site').value,
+    mgr:   document.getElementById('h-mgr').value,
     email: document.getElementById('h-email').value
   };
-  if (document.getElementById('li-container').children.length === 0) addLineItem();
+  if(document.getElementById('li-container').children.length===0) addLineItem();
   goScreen('lineitems');
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // LINE ITEMS
-// ══════════════════════════════════════
-const CATS = ['General','Equipment','Services','Materials','IT & Software','Civil Works','Consumables','Spare Parts'];
-const UOMS = ['Nos','Kg','Ltr','Hours','Days','Months','Sets','Meters','Sq.Mt','MT'];
-
+// ══════════════════════════════════════════════════════
 function addLineItem() {
-  const container = document.getElementById('li-container');
-  const idx = container.children.length + 1;
-  const uid = 'li_' + Date.now();
-  const catOpts = CATS.map(c => `<option>${c}</option>`).join('');
-  const uomOpts = UOMS.map(u => `<option>${u}</option>`).join('');
-  const div = document.createElement('div');
-  div.className = 'licard'; div.id = uid;
-  div.innerHTML = `
-    <div class="li-num">Item #${idx}</div>
-    <button class="li-del" onclick="removeItem('${uid}')" title="Remove">&#10005;</button>
-    <div class="fgrid g3">
-      <div class="fg"><label>Category <span class="req">*</span></label>
-        <select class="li-cat"><option value="">Select</option>${catOpts}</select></div>
-      <div class="fg s2"><label>Description <span class="req">*</span></label>
-        <input type="text" class="li-desc" placeholder="Brief item description"/></div>
-      <div class="fg s3"><label>Specification</label>
-        <textarea class="li-spec" placeholder="Technical specification (optional)"></textarea></div>
-      <div class="fg"><label>Quantity <span class="req">*</span></label>
-        <input type="number" class="li-qty" min="0.01" step="any" placeholder="0"/></div>
-      <div class="fg"><label>UOM <span class="req">*</span></label>
-        <select class="li-uom"><option value="">Select</option>${uomOpts}</select></div>
-      <div class="fg"></div>
-      <div class="fg"><label>Service Start Date</label>
-        <input type="date" class="li-start"/></div>
-      <div class="fg"><label>Service End Date</label>
-        <input type="date" class="li-end"/></div>
-    </div>`;
-  container.appendChild(div);
+  const c = document.getElementById('li-container');
+  const idx = c.children.length+1;
+  const uid = 'li_'+Date.now();
+  const catOpts = CATS.map(x=>`<option>${x}</option>`).join('');
+  const uomOpts = UOMS.map(x=>`<option>${x}</option>`).join('');
+  const d = document.createElement('div');
+  d.className='licard'; d.id=uid;
+  d.innerHTML=`<div class="li-num">Item #${idx}</div>
+  <button class="li-del" onclick="removeItem('${uid}')">&#10005;</button>
+  <div style="padding-top:16px"><div class="fgrid g3">
+    <div class="fg"><label>Category <span class="req">*</span></label><select class="li-cat"><option value="">Select</option>${catOpts}</select></div>
+    <div class="fg s2"><label>Description <span class="req">*</span></label><input type="text" class="li-desc" placeholder="Brief description"/></div>
+    <div class="fg s3"><label>Specification</label><textarea class="li-spec" placeholder="Technical specification (optional)"></textarea></div>
+    <div class="fg"><label>Quantity <span class="req">*</span></label><input type="number" class="li-qty" min="0.01" step="any" placeholder="0"/></div>
+    <div class="fg"><label>UOM <span class="req">*</span></label><select class="li-uom"><option value="">Select</option>${uomOpts}</select></div>
+    <div class="fg"></div>
+    <div class="fg"><label>Service Start Date</label><input type="date" class="li-start"/></div>
+    <div class="fg"><label>Service End Date</label><input type="date" class="li-end"/></div>
+  </div></div>`;
+  c.appendChild(d);
   updateLICount();
 }
 
 function removeItem(uid) {
-  const el = document.getElementById(uid);
-  if (el) el.remove();
-  reindexItems();
+  const el=document.getElementById(uid); if(el)el.remove();
+  document.querySelectorAll('.licard').forEach((el,i)=>el.querySelector('.li-num').textContent=`Item #${i+1}`);
   updateLICount();
 }
 
-function reindexItems() {
-  document.querySelectorAll('.licard').forEach((el, i) => {
-    el.querySelector('.li-num').textContent = `Item #${i + 1}`;
-  });
-}
-
 function updateLICount() {
-  const n = document.getElementById('li-container').children.length;
-  document.getElementById('li-count').textContent = n ? `(${n} item${n > 1 ? 's' : ''})` : '';
+  const n=document.getElementById('li-container').children.length;
+  document.getElementById('li-count').textContent=n?`(${n} item${n>1?'s':''})`:'';
 }
 
 function validateLineItems() {
-  const cards = document.querySelectorAll('.licard');
-  document.getElementById('e-items').classList.toggle('show', cards.length === 0);
-  if (cards.length === 0) return;
-  let ok = true; const items = [];
-  cards.forEach(c => {
-    const cat = c.querySelector('.li-cat').value;
-    const desc = c.querySelector('.li-desc').value.trim();
-    const qty = c.querySelector('.li-qty').value;
-    const uom = c.querySelector('.li-uom').value;
-    if (!cat || !desc || !qty || !uom) ok = false;
-    items.push({ cat, desc, spec: c.querySelector('.li-spec').value, qty, uom, start: c.querySelector('.li-start').value, end: c.querySelector('.li-end').value });
+  const cards=document.querySelectorAll('.licard');
+  document.getElementById('e-items').classList.toggle('show',cards.length===0);
+  if(cards.length===0) return;
+  let ok=true; const items=[];
+  cards.forEach(c=>{
+    const cat=c.querySelector('.li-cat').value;
+    const desc=c.querySelector('.li-desc').value.trim();
+    const qty=c.querySelector('.li-qty').value;
+    const uom=c.querySelector('.li-uom').value;
+    if(!cat||!desc||!qty||!uom) ok=false;
+    items.push({cat,desc,spec:c.querySelector('.li-spec').value,qty,uom,start:c.querySelector('.li-start').value,end:c.querySelector('.li-end').value});
   });
-  if (!ok) { showToast('Fill all required fields in every line item', 'error'); return; }
-  APP.currentPR.items = items;
+  if(!ok){showToast('Fill all required fields in every line item','error');return;}
+  APP.current.items=items;
   buildReview();
   goScreen('review');
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // REVIEW
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 function buildReview() {
-  const h = APP.currentPR.header;
-  const fields = [['State', h.state], ['P-Code', h.pcode], ['Date', h.date], ['Site', h.site], ['Manager', h.mgr], ['Email', h.email], ['Submitted By', APP.user.email], ['Status', 'Pending']];
-  document.getElementById('review-hdr').innerHTML = fields.map(f => `<div class="rfield"><div class="rlabel">${f[0]}</div><div class="rval">${f[1]}</div></div>`).join('');
-  document.getElementById('review-tbody').innerHTML = APP.currentPR.items.map((it, i) =>
-    `<tr><td>${i + 1}</td><td>${it.cat}</td><td>${it.desc}</td><td>${it.spec || '—'}</td><td>${it.qty}</td><td>${it.uom}</td><td>${it.start || '—'}</td><td>${it.end || '—'}</td></tr>`
-  ).join('');
+  const h=APP.current.header;
+  const fields=[['State',h.state],['P-Code',h.pcode],['Date',h.date],['Site',h.site],['Manager',h.mgr],['Email',h.email],['Submitted By',APP.user.email],['Status','Pending']];
+  document.getElementById('review-hdr').innerHTML=fields.map(f=>`<div class="rfield"><div class="rlabel">${f[0]}</div><div class="rval">${f[1]}</div></div>`).join('');
+  document.getElementById('review-tbody').innerHTML=APP.current.items.map((it,i)=>`<tr><td>${i+1}</td><td>${it.cat}</td><td>${it.desc}</td><td>${it.spec||'—'}</td><td>${it.qty}</td><td>${it.uom}</td><td>${it.start||'—'}</td><td>${it.end||'—'}</td></tr>`).join('');
 }
 
-// ══════════════════════════════════════
-// SUBMIT PR
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// SUBMIT
+// ══════════════════════════════════════════════════════
 async function submitPR() {
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Submitting...';
-  showLoading('Saving to SharePoint...');
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Submitting...';
+  showLoad('Saving to SharePoint...');
   try {
-    const reqNum = await generateReqNum();
-    if (!APP.demoMode) {
-      await writeHeader(reqNum, APP.currentPR.header);
-      for (const item of APP.currentPR.items) {
-        await writeLineItem(reqNum, item);
-      }
+    const reqNum = await genReqNum();
+    if (!APP.demo) {
+      await saveHeader(reqNum, APP.current.header);
+      for (const it of APP.current.items) await saveLineItem(reqNum, it);
     } else {
-      // Demo mode — store locally
-      const pr = {
-        ...APP.currentPR.header,
-        [CONFIG.hCols.reqNum]: reqNum,
-        [CONFIG.hCols.status]: 'Pending',
-        [CONFIG.hCols.submittedBy]: APP.user.email,
-        Id: Date.now(),
-        _items: APP.currentPR.items.map(it => ({
-          [CONFIG.liCols.category]: it.cat,
-          [CONFIG.liCols.description]: it.desc,
-          [CONFIG.liCols.specification]: it.spec,
-          [CONFIG.liCols.qty]: it.qty,
-          [CONFIG.liCols.uom]: it.uom,
-          [CONFIG.liCols.startDate]: it.start,
-          [CONFIG.liCols.endDate]: it.end
+      APP.demoStore.unshift({
+        ...APP.current.header,
+        [HC.title]:reqNum,[HC.status]:'Pending',[HC.submittedBy]:APP.user.email,
+        Id:Date.now(),
+        _items:APP.current.items.map(it=>({
+          [LC.cat]:it.cat,[LC.desc]:it.desc,[LC.spec]:it.spec,
+          [LC.qty]:it.qty,[LC.uom]:it.uom,[LC.start]:it.start,[LC.end]:it.end
         }))
-      };
-      APP.demoData.unshift(pr);
+      });
     }
-    hideLoading();
-    document.getElementById('confirm-num').textContent = reqNum;
+    hideLoad();
+    document.getElementById('confirm-num').textContent=reqNum;
     goScreen('confirm');
-  } catch (e) {
-    hideLoading();
-    showToast('Submission failed: ' + e.message, 'error');
-    btn.disabled = false;
-    btn.textContent = 'Submit Purchase Request';
+  } catch(e) {
+    hideLoad();
+    showToast('Submission failed: '+e.message,'error');
+    btn.disabled=false; btn.textContent='Submit Purchase Request';
   }
 }
 
 function newPR() {
-  APP.currentPR = { header: {}, items: [] };
-  ['h-state', 'h-mgr', 'h-email'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('h-pcode').value = '';
-  document.getElementById('h-site').value = '';
-  setDate();
-  document.getElementById('li-container').innerHTML = '';
+  APP.current={header:{},items:[]};
+  ['h-state','h-mgr','h-email'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('h-pcode').value='';
+  document.getElementById('h-site').value='';
+  document.getElementById('h-date').value=todayISO();
+  document.getElementById('li-container').innerHTML='';
   updateLICount();
   goScreen('home');
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // MY REQUESTS
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 async function loadMyRequests() {
-  document.getElementById('my-tbody').innerHTML = `<tr><td colspan="8"><div class="empty"><div class="empty-icon">&#8987;</div><div class="empty-txt">Loading...</div></div></td></tr>`;
+  document.getElementById('my-tbody').innerHTML=`<tr><td colspan="8"><div class="empty"><div class="empty-icon">&#8987;</div><div class="empty-txt">Loading...</div></div></td></tr>`;
   try {
-    const data = await fetchMyRequests();
-    renderMyRequests(data);
-  } catch (e) {
-    showToast('Failed to load requests: ' + e.message, 'error');
-  }
+    const data = await getMyPRs();
+    if(!data||data.length===0){
+      document.getElementById('my-tbody').innerHTML=`<tr><td colspan="8"><div class="empty"><div class="empty-icon">&#128193;</div><div class="empty-txt">No requests submitted yet.</div></div></td></tr>`;
+      return;
+    }
+    document.getElementById('my-tbody').innerHTML=data.map(p=>`
+      <tr class="trow" onclick="openModal('${p[HC.title]}',false)">
+        <td><strong style="font-family:'DM Mono',monospace;font-size:12px">${p[HC.title]}</strong></td>
+        <td>${p[HC.site]||'—'}</td><td>${p[HC.pcode]||'—'}</td><td>${p[HC.state]||'—'}</td>
+        <td>${fmtDate(p[HC.date])}</td>
+        <td>${badge(p[HC.status])}</td>
+        <td style="font-size:12px;color:var(--grey4)">${p[HC.comment]?p[HC.comment].substring(0,40)+'…':'—'}</td>
+        <td><button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();openModal('${p[HC.title]}',false)">View</button></td>
+      </tr>`).join('');
+  } catch(e) { showToast('Failed to load: '+e.message,'error'); }
 }
 
-function renderMyRequests(data) {
-  const tbody = document.getElementById('my-tbody');
-  if (!data || data.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="empty-icon">&#128193;</div><div class="empty-txt">No requests submitted yet.</div></div></td></tr>`;
-    return;
-  }
-  tbody.innerHTML = data.map(p => `
-    <tr class="trow" onclick="openModal('${p[CONFIG.hCols.reqNum]}', false)">
-      <td><strong style="font-family:'DM Mono',monospace;font-size:12px">${p[CONFIG.hCols.reqNum]}</strong></td>
-      <td>${p[CONFIG.hCols.site] || '—'}</td>
-      <td>${p[CONFIG.hCols.pcode] || '—'}</td>
-      <td>${p[CONFIG.hCols.state] || '—'}</td>
-      <td>${fmtDate(p[CONFIG.hCols.date])}</td>
-      <td style="text-align:center">—</td>
-      <td>${badgeHtml(p[CONFIG.hCols.status])}</td>
-      <td><button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();openModal('${p[CONFIG.hCols.reqNum]}', false)">View</button></td>
-    </tr>`).join('');
-}
-
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // APPROVALS
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
 async function loadApprovals() {
-  document.getElementById('approvals-tbody').innerHTML = `<tr><td colspan="8"><div class="empty"><div class="empty-icon">&#8987;</div><div class="empty-txt">Loading...</div></div></td></tr>`;
+  document.getElementById('approvals-tbody').innerHTML=`<tr><td colspan="7"><div class="empty"><div class="empty-icon">&#8987;</div><div class="empty-txt">Loading...</div></div></td></tr>`;
   try {
-    const data = await fetchAllRequests();
-    renderApprovals(data);
-  } catch (e) {
-    showToast('Failed to load approvals: ' + e.message, 'error');
-  }
+    const data = await getAllPRs();
+    if(!data||data.length===0){
+      document.getElementById('approvals-tbody').innerHTML=`<tr><td colspan="7"><div class="empty"><div class="empty-icon">&#128203;</div><div class="empty-txt">No requests in queue.</div></div></td></tr>`;
+      return;
+    }
+    document.getElementById('approvals-tbody').innerHTML=data.map(p=>`
+      <tr class="trow" onclick="openModal('${p[HC.title]}',true)">
+        <td><strong style="font-family:'DM Mono',monospace;font-size:12px">${p[HC.title]}</strong></td>
+        <td style="font-size:12px">${(p[HC.submittedBy]||'').split('@')[0]}</td>
+        <td>${p[HC.site]||'—'}</td><td>${p[HC.pcode]||'—'}</td>
+        <td>${fmtDate(p[HC.date])}</td>
+        <td>${badge(p[HC.status])}</td>
+        <td><button class="btn btn-sm btn-primary" onclick="event.stopPropagation();openModal('${p[HC.title]}',true)">Review</button></td>
+      </tr>`).join('');
+  } catch(e) { showToast('Failed to load: '+e.message,'error'); }
 }
 
-function renderApprovals(data) {
-  const tbody = document.getElementById('approvals-tbody');
-  if (!data || data.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="empty-icon">&#128203;</div><div class="empty-txt">No requests in queue.</div></div></td></tr>`;
-    return;
-  }
-  tbody.innerHTML = data.map(p => `
-    <tr class="trow" onclick="openModal('${p[CONFIG.hCols.reqNum]}', true)">
-      <td><strong style="font-family:'DM Mono',monospace;font-size:12px">${p[CONFIG.hCols.reqNum]}</strong></td>
-      <td style="font-size:12px">${(p[CONFIG.hCols.submittedBy] || '').split('@')[0]}</td>
-      <td>${p[CONFIG.hCols.site] || '—'}</td>
-      <td>${p[CONFIG.hCols.pcode] || '—'}</td>
-      <td>${fmtDate(p[CONFIG.hCols.date])}</td>
-      <td style="text-align:center">—</td>
-      <td>${badgeHtml(p[CONFIG.hCols.status])}</td>
-      <td><button class="btn btn-sm btn-primary" onclick="event.stopPropagation();openModal('${p[CONFIG.hCols.reqNum]}', true)">Review</button></td>
-    </tr>`).join('');
-}
-
-// ══════════════════════════════════════
-// MODAL / DETAIL VIEW
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// MODAL
+// ══════════════════════════════════════════════════════
 async function openModal(reqNum, isApprover) {
-  showLoading('Loading details...');
+  showLoad('Loading...');
   try {
     let pr;
-    if (APP.demoMode) {
-      pr = APP.demoData.find(p => p[CONFIG.hCols.reqNum] === reqNum);
+    if(APP.demo){
+      pr=APP.demoStore.find(p=>p[HC.title]===reqNum);
     } else {
-      const res = await spFetch(`${listUrl(CONFIG.headersListName)}?$filter=${CONFIG.hCols.reqNum} eq '${reqNum}'`, 'GET');
-      pr = res.d.results[0];
+      const r=await spGET(`${listUrl(SP.headersList)}?$filter=${HC.title} eq '${reqNum}'`);
+      pr=r.d.results[0];
     }
-    if (!pr) { hideLoading(); showToast('PR not found', 'error'); return; }
-    APP.activeModalPR = pr;
-    const items = await fetchLineItems(reqNum);
-    hideLoading();
-    document.getElementById('modal-reqnum').textContent = reqNum;
-    document.getElementById('modal-badge').innerHTML = badgeHtml(pr[CONFIG.hCols.status]);
-    const hFields = [
-      ['State', pr[CONFIG.hCols.state]],
-      ['P-Code', pr[CONFIG.hCols.pcode]],
-      ['Date', fmtDate(pr[CONFIG.hCols.date])],
-      ['Site', pr[CONFIG.hCols.site]],
-      ['Manager', pr[CONFIG.hCols.mgr]],
-      ['Email', pr[CONFIG.hCols.email]],
-      ['Submitted By', pr[CONFIG.hCols.submittedBy]],
-      ['Status', pr[CONFIG.hCols.status]]
-    ];
-    document.getElementById('modal-hdr-grid').innerHTML = hFields.map(f => `<div class="rfield"><div class="rlabel">${f[0]}</div><div class="rval">${f[1] || '—'}</div></div>`).join('');
-    document.getElementById('modal-li-tbody').innerHTML = items.map((it, i) => `
-      <tr><td>${i + 1}</td>
-      <td>${it[CONFIG.liCols.category] || '—'}</td>
-      <td>${it[CONFIG.liCols.description] || '—'}</td>
-      <td>${it[CONFIG.liCols.specification] || '—'}</td>
-      <td>${it[CONFIG.liCols.qty] || '—'}</td>
-      <td>${it[CONFIG.liCols.uom] || '—'}</td>
-      <td>${fmtDate(it[CONFIG.liCols.startDate])}</td>
-      <td>${fmtDate(it[CONFIG.liCols.endDate])}</td></tr>`).join('');
-    const status = pr[CONFIG.hCols.status];
-    const canDecide = isApprover && status === 'Pending';
-    document.getElementById('approver-decision').style.display = canDecide ? 'block' : 'none';
-    document.getElementById('decision-done').style.display = 'none';
-    document.getElementById('modal-comment').value = '';
+    if(!pr){hideLoad();showToast('Not found','error');return;}
+    APP.activeModal=pr;
+    const items=await getLineItems(reqNum);
+    hideLoad();
+    document.getElementById('modal-reqnum').textContent=reqNum;
+    document.getElementById('modal-badge').innerHTML=badge(pr[HC.status]);
+    const hf=[['State',pr[HC.state]],['P-Code',pr[HC.pcode]],['Date',fmtDate(pr[HC.date])],['Site',pr[HC.site]],['Manager',pr[HC.mgr]],['Email',pr[HC.email]],['Submitted By',pr[HC.submittedBy]],['Status',pr[HC.status]]];
+    document.getElementById('modal-hdr-grid').innerHTML=hf.map(f=>`<div class="rfield"><div class="rlabel">${f[0]}</div><div class="rval">${f[1]||'—'}</div></div>`).join('');
+    document.getElementById('modal-li-tbody').innerHTML=items.length?items.map((it,i)=>`<tr><td>${i+1}</td><td>${it[LC.cat]||'—'}</td><td>${it[LC.desc]||'—'}</td><td>${it[LC.spec]||'—'}</td><td>${it[LC.qty]||'—'}</td><td>${it[LC.uom]||'—'}</td><td>${fmtDate(it[LC.start])}</td><td>${fmtDate(it[LC.end])}</td></tr>`).join(''):`<tr><td colspan="8" style="text-align:center;color:var(--grey4);padding:20px">No line items found</td></tr>`;
+    const canDecide=isApprover&&pr[HC.status]==='Pending';
+    document.getElementById('approver-decision').style.display=canDecide?'block':'none';
+    document.getElementById('decision-done').style.display='none';
+    document.getElementById('modal-comment').value='';
     document.getElementById('e-comment').classList.remove('show');
-    const comment = pr[CONFIG.hCols.approverComment];
-    const commentDiv = document.getElementById('comment-display');
-    if (comment && !canDecide) {
-      commentDiv.style.display = 'block';
-      document.getElementById('comment-text').textContent = comment;
-    } else {
-      commentDiv.style.display = 'none';
-    }
+    const cmt=pr[HC.comment];
+    const cDiv=document.getElementById('comment-display');
+    if(cmt&&!canDecide){cDiv.style.display='block';document.getElementById('comment-text').textContent=cmt;}
+    else cDiv.style.display='none';
     document.getElementById('detail-overlay').classList.add('open');
-  } catch (e) {
-    hideLoading();
-    showToast('Error loading PR: ' + e.message, 'error');
-  }
+  } catch(e){hideLoad();showToast('Error: '+e.message,'error');}
 }
 
-function closeModal() {
-  document.getElementById('detail-overlay').classList.remove('open');
-  APP.activeModalPR = null;
-}
+function closeModal(){document.getElementById('detail-overlay').classList.remove('open');APP.activeModal=null;}
 
-async function makeDecision(decision) {
-  const comment = document.getElementById('modal-comment').value.trim();
-  if (decision === 'Rejected' && !comment) {
-    document.getElementById('e-comment').classList.add('show');
-    return;
-  }
+async function makeDecision(decision){
+  const comment=document.getElementById('modal-comment').value.trim();
+  if(decision==='Rejected'&&!comment){document.getElementById('e-comment').classList.add('show');return;}
   document.getElementById('e-comment').classList.remove('show');
-  showLoading('Updating SharePoint...');
-  try {
-    const pr = APP.activeModalPR;
-    if (!APP.demoMode) {
-      await updateStatus(pr.Id, decision, comment);
-    } else {
-      pr[CONFIG.hCols.status] = decision;
-      pr[CONFIG.hCols.approverComment] = comment;
-    }
-    hideLoading();
-    const done = document.getElementById('decision-done');
-    done.style.display = 'block';
-    done.style.background = decision === 'Approved' ? 'var(--successbg)' : 'var(--dangerbg)';
-    done.style.color = decision === 'Approved' ? 'var(--success)' : 'var(--danger)';
-    done.textContent = `PR ${decision.toLowerCase()} successfully.${comment ? ' Comment: "' + comment + '"' : ''}`;
-    document.getElementById('modal-badge').innerHTML = badgeHtml(decision);
-    document.getElementById('approver-decision').style.display = 'none';
-    if (APP.isApprover) loadApprovals();
-    showToast(`PR ${decision.toLowerCase()} successfully`, 'success');
-  } catch (e) {
-    hideLoading();
-    showToast('Update failed: ' + e.message, 'error');
-  }
+  showLoad('Updating...');
+  try{
+    const pr=APP.activeModal;
+    if(!APP.demo) await updatePR(pr.Id,decision,comment);
+    else{pr[HC.status]=decision;pr[HC.comment]=comment;}
+    hideLoad();
+    const done=document.getElementById('decision-done');
+    done.style.display='block';
+    done.style.background=decision==='Approved'?'var(--successbg)':'var(--dangerbg)';
+    done.style.color=decision==='Approved'?'var(--success)':'var(--danger)';
+    done.textContent=`PR ${decision.toLowerCase()} successfully.`+(comment?` Comment: "${comment}"`:'');
+    document.getElementById('modal-badge').innerHTML=badge(decision);
+    document.getElementById('approver-decision').style.display='none';
+    showToast(`PR ${decision.toLowerCase()} successfully`,'success');
+    if(APP.isApprover) loadApprovals();
+  }catch(e){hideLoad();showToast('Failed: '+e.message,'error');}
 }
 
-// ══════════════════════════════════════
+document.getElementById('detail-overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+// ══════════════════════════════════════════════════════
 // UTILITIES
-// ══════════════════════════════════════
-function badgeHtml(s) {
-  const cls = s === 'Pending' ? 'b-pending' : s === 'Approved' ? 'b-approved' : s === 'Rejected' ? 'b-rejected' : 'b-draft';
-  return `<span class="badge ${cls}">${s || 'Unknown'}</span>`;
+// ══════════════════════════════════════════════════════
+function badge(s){
+  const m={Pending:'b-pending',Approved:'b-approved',Rejected:'b-rejected'};
+  return `<span class="badge ${m[s]||'b-draft'}">${s||'Unknown'}</span>`;
 }
-
-function fmtDate(d) {
-  if (!d) return '—';
-  try { return new Date(d).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }); }
-  catch (e) { return d; }
+function fmtDate(d){
+  if(!d||d==='—') return '—';
+  try{return new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});}catch{return d;}
 }
-
-function showLoading(msg) {
-  document.getElementById('loading-text').textContent = msg || 'Loading...';
-  document.getElementById('loading-overlay').classList.add('show');
-}
-
-function hideLoading() {
-  document.getElementById('loading-overlay').classList.remove('show');
-}
-
-function showToast(msg, type) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast' + (type ? ' ' + type : '');
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
-}
-
-// Close modal on overlay click
-document.getElementById('detail-overlay').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
-
-// ══════════════════════════════════════
-// INIT
-// ══════════════════════════════════════
-window.addEventListener('load', initMSAL);
+function todayISO(){const d=new Date();return d.toISOString().split('T')[0];}
+function showLoad(msg){document.getElementById('loading-text').textContent=msg||'Loading...';document.getElementById('loading-overlay').classList.add('show');}
+function hideLoad(){document.getElementById('loading-overlay').classList.remove('show');}
+function showToast(msg,type){const t=document.getElementById('toast');t.textContent=msg;t.className='toast'+(type?' '+type:'');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
 </script>
 </body>
 </html>
