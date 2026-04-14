@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PR Tracker — Envision Energy</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0f2137;--navy2:#172d47;--navy3:#1e3a5f;
+  --accent:#2e7ef5;--accent2:#1a5fcc;
+  --grey1:#f5f7fa;--grey2:#eaeff5;--grey3:#d1dbe8;--grey4:#8fa3bb;--grey5:#4a6180;
+  --white:#ffffff;--text:#0f2137;--text2:#3d5166;
+  --success:#1a7f4b;--successbg:#e8f5ee;
+  --danger:#c0392b;--dangerbg:#fdecea;
+  --warn:#d97706;--warnbg:#fef3e2;
+  --pending:#b45309;--pendingbg:#fef3cd;
+  --shadow:0 1px 3px rgba(15,33,55,.08),0 4px 12px rgba(15,33,55,.06);
+  --shadow2:0 2px 8px rgba(15,33,55,.12),0 8px 24px rgba(15,33,55,.08);
+  --radius:8px;--radius2:12px;
+  font-family:'DM Sans',sans-serif;
+}
+body{background:var(--grey1);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5}
+.topbar{background:var(--navy);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:50}
+.topbar-brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;font-weight:700}
+.brand-name{font-size:14px;font-weight:600;color:white;letter-spacing:.3px}
+.brand-div{width:1px;height:16px;background:rgba(255,255,255,.2);margin:0 4px}
+.brand-sub{font-size:11px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace}
+.topbar-nav{display:flex;gap:2px}
+.tnav{background:none;border:none;color:rgba(255,255,255,.6);padding:7px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;transition:.15s}
+.tnav:hover{background:rgba(255,255,255,.1);color:white}
+.tnav.active{background:rgba(255,255,255,.15);color:white}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.user-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:0.5px solid rgba(255,255,255,.12);border-radius:20px;padding:4px 12px 4px 4px}
+.avatar{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:white;flex-shrink:0}
+.user-name{font-size:11px;color:rgba(255,255,255,.7);font-family:'DM Mono',monospace}
+.main{padding:28px 32px;max-width:1200px;margin:0 auto}
+.page-hdr{margin-bottom:24px}
+.page-title{font-size:22px;font-weight:600;color:var(--navy);letter-spacing:-.3px}
+.page-sub{font-size:13px;color:var(--grey4);margin-top:3px}
+.stepbar{display:flex;align-items:center;margin-bottom:28px;background:var(--white);border:0.5px solid var(--grey3);border-radius:var(--radius2);padding:16px 24px;box-shadow:var(--shadow)}
+.step{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--grey4);font-weight:500}
+.step.active{color:var(--navy)}
+.step.done{color:var(--success)}
+.sdot{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--grey3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;background:var(--white);flex-shrink:0}
+.step.active .sdot{background:var(--navy);border-color:var(--navy);color:white}
+.step.done .sdot{background:var(--success);border-color:var(--success);color:white}
+.sline{flex:1;height:1px;background:var(--grey3);margin:0 12px}
+.sline.done{background:var(--success)}
+.card{background:var(--white);border:0.5px solid var(--grey3);border-radius:var(--radius2);padding:24px;box-shadow:var(--shadow)}
+.card+.card{margin-top:16px}
+.card-hdr{font-size:11px;font-weight:700;color:var(--grey5);margin-bottom:18px;padding-bottom:12px;border-bottom:0.5px solid var(--grey2);text-transform:uppercase;letter-spacing:.6px}
+.fgrid{display:grid;gap:16px}
+.fgrid.g3{grid-template-columns:repeat(3,1fr)}
+.fgrid.g2{grid-template-columns:repeat(2,1fr)}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg.s2{grid-column:span 2}
+.fg.s3{grid-column:span 3}
+label{font-size:11px;font-weight:600;color:var(--grey5);text-transform:uppercase;letter-spacing:.5px}
+label .req{color:var(--danger);margin-left:2px}
+input,select,textarea{font-size:13px;font-family:'DM Sans',sans-serif;padding:9px 12px;border:0.5px solid var(--grey3);border-radius:var(--radius);color:var(--text);background:var(--white);width:100%;outline:none;transition:.15s}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(46,126,245,.1)}
+input[readonly]{background:var(--grey1);color:var(--grey4);font-family:'DM Mono',monospace;font-size:12px}
+textarea{resize:vertical;min-height:64px}
+.err{font-size:11px;color:var(--danger);margin-top:3px;display:none}
+.err.show{display:block}
+input.invalid,select.invalid{border-color:var(--danger)}
+.btn{padding:9px 20px;border-radius:var(--radius);font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--navy);color:white}
+.btn-primary:hover{background:var(--navy3)}
+.btn-ghost{background:var(--white);color:var(--text2);border:0.5px solid var(--grey3)}
+.btn-ghost:hover{background:var(--grey1)}
+.btn-sm{padding:6px 14px;font-size:12px}
+.btn-add{width:100%;margin-top:12px;background:none;border:1.5px dashed var(--grey3);border-radius:var(--radius);padding:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--accent);cursor:pointer;transition:.15s;font-weight:500}
+.btn-add:hover{border-color:var(--accent);background:#f0f6ff}
+.btn-success{background:var(--success);color:white;border:none;padding:9px 20px;border-radius:var(--radius);font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-success:hover{background:#155f38}
+.arow{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
+.arow.space{justify-content:space-between}
+.licard{background:var(--grey1);border:0.5px solid var(--grey2);border-radius:var(--radius);padding:18px 18px 14px;margin-bottom:12px;position:relative}
+.li-num{font-size:10px;font-weight:700;color:var(--grey4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;font-family:'DM Mono',monospace}
+.li-del{position:absolute;top:12px;right:12px;background:none;border:none;cursor:pointer;color:var(--grey4);font-size:18px;line-height:1;padding:2px 6px;border-radius:4px;transition:.15s}
+.li-del:hover{color:var(--danger);background:var(--dangerbg)}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.b-pending{background:var(--pendingbg);color:var(--pending)}
+.b-approved{background:var(--successbg);color:var(--success)}
+.b-rejected{background:var(--dangerbg);color:var(--danger)}
+.b-draft{background:var(--grey2);color:var(--grey4)}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--grey1);padding:10px 14px;text-align:left;font-weight:600;font-size:11px;color:var(--grey5);border-bottom:0.5px solid var(--grey3);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+td{padding:11px 14px;border-bottom:0.5px solid var(--grey2);color:var(--text);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.trow{cursor:pointer}
+.trow:hover td{background:#f8fafd}
+.rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:4px}
+.rfield{background:var(--grey1);border-radius:var(--radius);padding:12px 14px}
+.rlabel{font-size:10px;font-weight:700;color:var(--grey4);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.rval{font-size:13px;font-weight:500;color:var(--text)}
+.confirm-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px;text-align:center}
+.confirm-ring{width:72px;height:72px;border-radius:50%;background:var(--successbg);border:2px solid var(--success);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px}
+.confirm-num{font-size:24px;font-weight:700;color:var(--navy);margin-bottom:6px;font-family:'DM Mono',monospace}
+.confirm-msg{font-size:14px;color:var(--grey4);margin-bottom:32px;line-height:1.7;max-width:380px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(10,20,35,.5);z-index:200;align-items:center;justify-content:center}
+.overlay.open{display:flex}
+.modal{background:var(--white);border-radius:var(--radius2);width:820px;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow2)}
+.modal-top{padding:24px 28px 16px;border-bottom:0.5px solid var(--grey2)}
+.modal-body{padding:24px 28px 28px}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--grey4);padding:4px 8px;border-radius:4px}
+.modal-close:hover{color:var(--text);background:var(--grey2)}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:white;padding:12px 20px;border-radius:var(--radius);font-size:13px;font-weight:500;box-shadow:var(--shadow2);z-index:999;transform:translateY(80px);opacity:0;transition:.3s;max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{background:var(--success)}
+.toast.error{background:var(--danger)}
+.toast.warn{background:var(--warn)}
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,.85);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.loading-overlay.show{display:flex}
+.loading-spinner{width:36px;height:36px;border:3px solid var(--grey3);border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite}
+.loading-text{font-size:13px;color:var(--grey4);font-weight:500}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
+.empty{text-align:center;padding:56px 24px}
+.empty-icon{font-size:32px;margin-bottom:10px;opacity:.5}
+.empty-txt{font-size:14px;color:var(--grey4)}
+.screen{display:none}
+.screen.active{display:block}
+.auth-wrap{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 56px);padding:24px}
+.auth-card{background:var(--white);border:0.5px solid var(--grey3);border-radius:var(--radius2);padding:40px;width:440px;box-shadow:var(--shadow2);text-align:center}
+.auth-logo{width:52px;height:52px;background:var(--navy);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:22px}
+.auth-title{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.auth-sub{font-size:13px;color:var(--grey4);margin-bottom:28px;line-height:1.6}
+.section-label{font-size:11px;font-weight:700;color:var(--grey5);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px}
+.name-input-wrap{margin-bottom:20px;text-align:left}
+.name-input-wrap label{display:block;margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loading-overlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text" id="loading-text">Loading...</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="brand-mark">E</div>
+    <div class="brand-name">Envision Energy</div>
+    <div class="brand-div"></div>
+    <div class="brand-sub">PR Tracker</div>
+  </div>
+  <div class="topbar-nav" id="main-nav" style="display:none">
+    <button class="tnav active" id="nav-new" onclick="goScreen('home')">+ New PR</button>
+    <button class="tnav" id="nav-mine" onclick="goScreen('myrequests')">My Requests</button>
+  </div>
+  <div class="topbar-right">
+    <div class="user-pill" id="user-pill" style="display:none">
+      <div class="avatar" id="user-avatar">?</div>
+      <div class="user-name" id="user-name-display">—</div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH SCREEN -->
+<div class="screen active" id="screen-auth">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">&#9671;</div>
+      <div class="auth-title">PR Tracker</div>
+      <div class="auth-sub">Enter your name and Envision Energy email to get started.</div>
+      <div class="name-input-wrap">
+        <label>Your full name</label>
+        <input type="text" id="auth-name" placeholder="e.g. Nandit Naveen" style="margin-bottom:10px"/>
+        <label>Work email</label>
+        <input type="email" id="auth-email" placeholder="you@envision-energy.com"/>
+        <div style="font-size:11px;color:var(--danger);margin-top:4px;display:none" id="auth-err">Please enter your name and a valid @envision-energy.com email.</div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:14px;padding:11px 20px" onclick="signIn()">
+        Continue
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CREATE PR -->
+<div class="screen" id="screen-home">
+  <div class="main">
+    <div class="page-hdr"><div class="page-title">Create Purchase Request</div><div class="page-sub">All fields marked * are required.</div></div>
+    <div class="stepbar">
+      <div class="step active" id="step1"><div class="sdot">1</div>Header Details</div>
+      <div class="sline" id="sline1"></div>
+      <div class="step" id="step2"><div class="sdot">2</div>Line Items</div>
+      <div class="sline" id="sline2"></div>
+      <div class="step" id="step3"><div class="sdot">3</div>Review</div>
+      <div class="sline" id="sline3"></div>
+      <div class="step" id="step4"><div class="sdot">4</div>Submit</div>
+    </div>
+    <div class="card">
+      <div class="card-hdr">Request Header</div>
+      <div class="fgrid g3">
+        <div class="fg"><label>Request Number</label><input type="text" id="h-reqnum" readonly value="Auto-generated"/></div>
+        <div class="fg"><label>Submit Date <span class="req">*</span></label><input type="date" id="h-date"/></div>
+        <div class="fg"><label>State <span class="req">*</span></label><input type="text" id="h-state" placeholder="e.g. Karnataka"/><span class="err" id="e-state">Required</span></div>
+        <div class="fg"><label>P-Code <span class="req">*</span></label>
+          <select id="h-pcode">
+            <option value="">Select P-Code</option>
+            <option>P-01</option><option>P-02</option><option>P-03</option>
+          </select>
+          <span class="err" id="e-pcode">Required</span></div>
+        <div class="fg"><label>Site Name <span class="req">*</span></label>
+          <select id="h-site">
+            <option value="">Select Site</option>
+            <option>Site A</option><option>Site B</option><option>Site C</option><option>Site D</option><option>Site E</option>
+          </select>
+          <span class="err" id="e-site">Required</span></div>
+        <div class="fg"><label>Site Manager Name <span class="req">*</span></label><input type="text" id="h-mgr" placeholder="Full name"/><span class="err" id="e-mgr">Required</span></div>
+        <div class="fg s2"><label>Site Manager Email <span class="req">*</span></label><input type="email" id="h-email" placeholder="manager@envision-energy.com"/><span class="err" id="e-email">Must be @envision-energy.com</span></div>
+      </div>
+    </div>
+    <div class="arow"><button class="btn btn-primary" onclick="validateHeader()">Next: Add Line Items &rarr;</button></div>
+  </div>
+</div>
+
+<!-- LINE ITEMS -->
+<div class="screen" id="screen-lineitems">
+  <div class="main">
+    <div class="page-hdr"><div class="page-title">Line Items</div><div class="page-sub">Add at least one line item.</div></div>
+    <div class="stepbar">
+      <div class="step done"><div class="sdot">&#10003;</div>Header Details</div>
+      <div class="sline done"></div>
+      <div class="step active"><div class="sdot">2</div>Line Items</div>
+      <div class="sline"></div>
+      <div class="step"><div class="sdot">3</div>Review</div>
+      <div class="sline"></div>
+      <div class="step"><div class="sdot">4</div>Submit</div>
+    </div>
+    <div class="card">
+      <div class="card-hdr">Line Items <span id="li-count" style="font-weight:400;color:var(--grey4);text-transform:none;letter-spacing:0;font-size:12px"></span></div>
+      <div id="li-container"></div>
+      <button class="btn-add" onclick="addLineItem()">+ Add Line Item</button>
+      <span class="err" id="e-items" style="margin-top:10px">Please add at least one line item.</span>
+    </div>
+    <div class="arow space">
+      <button class="btn btn-ghost" onclick="goScreen('home')">&larr; Back</button>
+      <button class="btn btn-primary" onclick="validateLineItems()">Next: Review &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEW -->
+<div class="screen" id="screen-review">
+  <div class="main">
+    <div class="page-hdr"><div class="page-title">Review &amp; Submit</div><div class="page-sub">Verify all details before submitting.</div></div>
+    <div class="stepbar">
+      <div class="step done"><div class="sdot">&#10003;</div>Header Details</div>
+      <div class="sline done"></div>
+      <div class="step done"><div class="sdot">&#10003;</div>Line Items</div>
+      <div class="sline done"></div>
+      <div class="step active"><div class="sdot">3</div>Review</div>
+      <div class="sline"></div>
+      <div class="step"><div class="sdot">4</div>Submit</div>
+    </div>
+    <div class="card"><div class="card-hdr">Request Header</div><div class="rgrid" id="review-hdr"></div></div>
+    <div class="card">
+      <div class="card-hdr">Line Items</div>
+      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Category</th><th>Description</th><th>Specification</th><th>Qty</th><th>UOM</th><th>Start Date</th><th>End Date</th></tr></thead><tbody id="review-tbody"></tbody></table></div>
+    </div>
+    <div class="arow space">
+      <button class="btn btn-ghost" onclick="goScreen('lineitems')">&larr; Back</button>
+      <button class="btn-success" onclick="submitPR()" id="submit-btn">Submit Purchase Request</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMATION -->
+<div class="screen" id="screen-confirm">
+  <div class="main">
+    <div class="confirm-wrap">
+      <div class="confirm-ring">&#10003;</div>
+      <div class="confirm-num" id="confirm-num">ENV-2026-0001</div>
+      <div class="confirm-msg">Purchase request submitted successfully and saved to Excel. The approver will review your request and you will be notified of the decision.</div>
+      <div style="display:flex;gap:12px">
+        <button class="btn btn-primary" onclick="newPR()">+ Create New PR</button>
+        <button class="btn btn-ghost" onclick="goScreen('myrequests')">View My Requests</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MY REQUESTS -->
+<div class="screen" id="screen-myrequests">
+  <div class="main">
+    <div class="page-hdr"><div class="page-title">My Requests</div><div class="page-sub">All purchase requests submitted by you.</div></div>
+    <div class="card" style="padding:0">
+      <div class="tbl-wrap">
+        <table><thead><tr><th>Request #</th><th>Site</th><th>P-Code</th><th>State</th><th>Date</th><th>Status</th><th>Approver Comment</th><th></th></tr></thead>
+        <tbody id="my-tbody"><tr><td colspan="8"><div class="empty"><div class="empty-icon">&#8987;</div><div class="empty-txt">Loading...</div></div></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="overlay" id="detail-overlay">
+  <div class="modal">
+    <div class="modal-top">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-size:17px;font-weight:700;color:var(--navy);font-family:'DM Mono',monospace" id="modal-reqnum">—</div>
+          <div style="margin-top:6px" id="modal-badge"></div>
+        </div>
+        <button class="modal-close" onclick="closeModal()">&#10005;</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="section-label">Header Details</div>
+      <div class="rgrid" id="modal-hdr-grid" style="margin-bottom:20px"></div>
+      <div class="section-label">Line Items</div>
+      <div class="tbl-wrap">
+        <table><thead><tr><th>#</th><th>Category</th><th>Description</th><th>Specification</th><th>Qty</th><th>UOM</th><th>Start</th><th>End</th></tr></thead>
+        <tbody id="modal-li-tbody"></tbody></table>
+      </div>
+      <div id="comment-display" style="display:none;margin-top:20px">
+        <div class="section-label">Approver Comment</div>
+        <div style="background:var(--grey1);border:0.5px solid var(--grey2);border-radius:var(--radius);padding:12px 14px;font-size:13px;color:var(--text2)" id="comment-text"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── FLOW URLs ────────────────────────────────────────────────
+const FLOWS = {
+  submit:      'https://default20e8dfa94087428e865a329bac3297.da.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/86619741bd6b48ee9b1ab2a2e41cfe50/triggers/manual/paths/invoke?api-version=1',
+  getRequests: 'https://default20e8dfa94087428e865a329bac3297.da.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/599d26a6884f479092e14a5fad58fdd8/triggers/manual/paths/invoke?api-version=1'
+};
+
+const DOMAIN = '@envision-energy.com';
+const CATS = ['General','Equipment','Services','Materials','IT & Software','Civil Works','Consumables','Spare Parts'];
+const UOMS = ['Nos','Kg','Ltr','Hours','Days','Months','Sets','Meters','Sq.Mt','MT'];
+
+const APP = {
+  user: null,
+  current: { header:{}, items:[] },
+  activeModal: null
+};
+
+// ─── AUTH ─────────────────────────────────────────────────────
+function signIn() {
+  const name  = document.getElementById('auth-name').value.trim();
+  const email = document.getElementById('auth-email').value.trim().toLowerCase();
+  const errEl = document.getElementById('auth-err');
+  if (!name || !email || !email.endsWith(DOMAIN)) {
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  const ini = name.split(' ').map(x=>x[0]||'').join('').toUpperCase().slice(0,2);
+  APP.user = { name, email, initials: ini };
+  document.getElementById('user-avatar').textContent = ini;
+  document.getElementById('user-name-display').textContent = name.split(' ')[0];
+  document.getElementById('user-pill').style.display = 'flex';
+  document.getElementById('main-nav').style.display = 'flex';
+  document.getElementById('h-date').value = todayISO();
+  goScreen('home');
+  showToast('Welcome, ' + name.split(' ')[0], 'success');
+}
+
+// Allow Enter key on auth screen
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('screen-auth').classList.contains('active')) signIn();
+});
+
+// ─── NAVIGATION ───────────────────────────────────────────────
+function goScreen(s) {
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  document.getElementById('screen-'+s).classList.add('active');
+  document.querySelectorAll('.tnav').forEach(x=>x.classList.remove('active'));
+  if(s==='home')        document.getElementById('nav-new').classList.add('active');
+  if(s==='myrequests'){ document.getElementById('nav-mine').classList.add('active'); loadMyRequests(); }
+}
+
+// ─── HEADER VALIDATION ────────────────────────────────────────
+function validateHeader() {
+  let ok = true;
+  const checks = [
+    {id:'h-state', err:'e-state', fn:v=>v.trim()!==''},
+    {id:'h-pcode', err:'e-pcode', fn:v=>v!==''},
+    {id:'h-site',  err:'e-site',  fn:v=>v!==''},
+    {id:'h-mgr',   err:'e-mgr',   fn:v=>v.trim()!==''},
+    {id:'h-email', err:'e-email', fn:v=>v.trim()!==''&&v.toLowerCase().endsWith(DOMAIN)}
+  ];
+  checks.forEach(c=>{
+    const v=document.getElementById(c.id).value;
+    const valid=c.fn(v);
+    document.getElementById(c.err).classList.toggle('show',!valid);
+    document.getElementById(c.id).classList.toggle('invalid',!valid);
+    if(!valid) ok=false;
+  });
+  if(!ok) return;
+  APP.current.header = {
+    state: document.getElementById('h-state').value,
+    pcode: document.getElementById('h-pcode').value,
+    date:  document.getElementById('h-date').value,
+    site:  document.getElementById('h-site').value,
+    mgr:   document.getElementById('h-mgr').value,
+    email: document.getElementById('h-email').value
+  };
+  if(document.getElementById('li-container').children.length===0) addLineItem();
+  goScreen('lineitems');
+}
+
+// ─── LINE ITEMS ───────────────────────────────────────────────
+function addLineItem() {
+  const c=document.getElementById('li-container');
+  const idx=c.children.length+1;
+  const uid='li_'+Date.now();
+  const catOpts=CATS.map(x=>`<option>${x}</option>`).join('');
+  const uomOpts=UOMS.map(x=>`<option>${x}</option>`).join('');
+  const d=document.createElement('div');
+  d.className='licard'; d.id=uid;
+  d.innerHTML=`<div class="li-num">Item #${idx}</div>
+  <button class="li-del" onclick="removeItem('${uid}')">&#10005;</button>
+  <div style="padding-top:16px"><div class="fgrid g3">
+    <div class="fg"><label>Category <span class="req">*</span></label><select class="li-cat"><option value="">Select</option>${catOpts}</select></div>
+    <div class="fg s2"><label>Description <span class="req">*</span></label><input type="text" class="li-desc" placeholder="Brief description"/></div>
+    <div class="fg s3"><label>Specification</label><textarea class="li-spec" placeholder="Technical specification (optional)"></textarea></div>
+    <div class="fg"><label>Quantity <span class="req">*</span></label><input type="number" class="li-qty" min="0.01" step="any" placeholder="0"/></div>
+    <div class="fg"><label>UOM <span class="req">*</span></label><select class="li-uom"><option value="">Select</option>${uomOpts}</select></div>
+    <div class="fg"></div>
+    <div class="fg"><label>Service Start Date</label><input type="date" class="li-start"/></div>
+    <div class="fg"><label>Service End Date</label><input type="date" class="li-end"/></div>
+  </div></div>`;
+  c.appendChild(d);
+  updateLICount();
+}
+
+function removeItem(uid) {
+  const el=document.getElementById(uid); if(el) el.remove();
+  document.querySelectorAll('.licard').forEach((el,i)=>el.querySelector('.li-num').textContent=`Item #${i+1}`);
+  updateLICount();
+}
+
+function updateLICount() {
+  const n=document.getElementById('li-container').children.length;
+  document.getElementById('li-count').textContent=n?`(${n} item${n>1?'s':''})`:'';
+}
+
+function validateLineItems() {
+  const cards=document.querySelectorAll('.licard');
+  document.getElementById('e-items').classList.toggle('show',cards.length===0);
+  if(cards.length===0) return;
+  let ok=true; const items=[];
+  cards.forEach(c=>{
+    const cat=c.querySelector('.li-cat').value;
+    const desc=c.querySelector('.li-desc').value.trim();
+    const qty=c.querySelector('.li-qty').value;
+    const uom=c.querySelector('.li-uom').value;
+    if(!cat||!desc||!qty||!uom) ok=false;
+    items.push({cat,desc,spec:c.querySelector('.li-spec').value,qty,uom,
+      start:c.querySelector('.li-start').value||'',
+      end:c.querySelector('.li-end').value||''});
+  });
+  if(!ok){showToast('Fill all required fields in every line item','error');return;}
+  APP.current.items=items;
+  buildReview();
+  goScreen('review');
+}
+
+// ─── REVIEW ───────────────────────────────────────────────────
+function buildReview() {
+  const h=APP.current.header;
+  const fields=[['State',h.state],['P-Code',h.pcode],['Date',h.date],['Site',h.site],['Manager',h.mgr],['Email',h.email],['Submitted By',APP.user.email],['Status','Pending']];
+  document.getElementById('review-hdr').innerHTML=fields.map(f=>`<div class="rfield"><div class="rlabel">${f[0]}</div><div class="rval">${f[1]||'—'}</div></div>`).join('');
+  document.getElementById('review-tbody').innerHTML=APP.current.items.map((it,i)=>`<tr><td>${i+1}</td><td>${it.cat}</td><td>${it.desc}</td><td>${it.spec||'—'}</td><td>${it.qty}</td><td>${it.uom}</td><td>${it.start||'—'}</td><td>${it.end||'—'}</td></tr>`).join('');
+}
+
+// ─── SUBMIT via Power Automate ────────────────────────────────
+async function submitPR() {
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Submitting...';
+  showLoad('Saving to Excel via Power Automate...');
+  try {
+    const reqNum = genReqNum();
+    const h = APP.current.header;
+    const payload = {
+      RequestNumber: reqNum,
+      State:         h.state,
+      PCode:         h.pcode,
+      RequestDate:   h.date,
+      SiteName:      h.site,
+      ManagerName:   h.mgr,
+      ManagerEmail:  h.email,
+      SubmittedBy:   APP.user.email,
+      Items: APP.current.items.map(it=>({
+        Category:         it.cat,
+        Description:      it.desc,
+        Specification:    it.spec || '',
+        Quantity:         String(it.qty),
+        UOM:              it.uom,
+        ServiceStartDate: it.start || '',
+        ServiceEndDate:   it.end   || ''
+      }))
+    };
+    const res = await fetch(FLOWS.submit, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('Flow returned ' + res.status);
+    hideLoad();
+    document.getElementById('confirm-num').textContent = reqNum;
+    goScreen('confirm');
+    showToast('PR saved to Excel ✓', 'success');
+  } catch(e) {
+    hideLoad();
+    btn.disabled=false;
+    btn.textContent='Submit Purchase Request';
+    showToast('Submission failed: ' + e.message + '. Check flow URL or CORS settings.', 'error');
+  }
+}
+
+// ─── GET MY REQUESTS via Power Automate ───────────────────────
+async function loadMyRequests() {
+  document.getElementById('my-tbody').innerHTML=`<tr><td colspan="8"><div class="empty"><div class="empty-icon">&#8987;</div><div class="empty-txt">Loading your requests...</div></div></td></tr>`;
+  try {
+    const res = await fetch(FLOWS.getRequests, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ SubmittedBy: APP.user.email })
+    });
+    if (!res.ok) throw new Error('Flow returned ' + res.status);
+    const data = await res.json();
+    const rows = Array.isArray(data) ? data : (data.value || []);
+    if (!rows.length) {
+      document.getElementById('my-tbody').innerHTML=`<tr><td colspan="8"><div class="empty"><div class="empty-icon">&#128193;</div><div class="empty-txt">No requests submitted yet.</div></div></td></tr>`;
+      return;
+    }
+    document.getElementById('my-tbody').innerHTML = rows.map(p=>`
+      <tr class="trow" onclick="openModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+        <td><strong style="font-family:'DM Mono',monospace;font-size:12px">${p.RequestNumber||p.Title||'—'}</strong></td>
+        <td>${p.SiteName||'—'}</td>
+        <td>${p.PCode||'—'}</td>
+        <td>${p.State||'—'}</td>
+        <td>${fmtDate(p.RequestDate)}</td>
+        <td>${badge(p.Status)}</td>
+        <td style="font-size:12px;color:var(--grey4)">${p.ApproverComment?p.ApproverComment.substring(0,40)+'…':'—'}</td>
+        <td><button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();openModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">View</button></td>
+      </tr>`).join('');
+  } catch(e) {
+    document.getElementById('my-tbody').innerHTML=`<tr><td colspan="8"><div class="empty"><div class="empty-icon">&#9888;</div><div class="empty-txt">Could not load requests: ${e.message}</div></div></td></tr>`;
+    showToast('Failed to load requests: ' + e.message, 'error');
+  }
+}
+
+// ─── MODAL ────────────────────────────────────────────────────
+function openModal(pr) {
+  if (typeof pr === 'string') pr = JSON.parse(pr);
+  APP.activeModal = pr;
+  const reqNum = pr.RequestNumber || pr.Title || '—';
+  document.getElementById('modal-reqnum').textContent = reqNum;
+  document.getElementById('modal-badge').innerHTML = badge(pr.Status);
+  const fields = [
+    ['State', pr.State], ['P-Code', pr.PCode],
+    ['Date', fmtDate(pr.RequestDate)], ['Site', pr.SiteName],
+    ['Manager', pr.ManagerName], ['Email', pr.ManagerEmail],
+    ['Submitted By', pr.SubmittedBy], ['Status', pr.Status]
+  ];
+  document.getElementById('modal-hdr-grid').innerHTML = fields.map(f=>`<div class="rfield"><div class="rlabel">${f[0]}</div><div class="rval">${f[1]||'—'}</div></div>`).join('');
+  document.getElementById('modal-li-tbody').innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--grey4);padding:20px;font-size:12px">Line items are stored in Excel. Open PR_Tracker.xlsx to view them.</td></tr>`;
+  const cmt = pr.ApproverComment;
+  const cDiv = document.getElementById('comment-display');
+  if (cmt) { cDiv.style.display='block'; document.getElementById('comment-text').textContent=cmt; }
+  else cDiv.style.display='none';
+  document.getElementById('detail-overlay').classList.add('open');
+}
+
+function closeModal() { document.getElementById('detail-overlay').classList.remove('open'); }
+document.getElementById('detail-overlay').addEventListener('click', e=>{ if(e.target===document.getElementById('detail-overlay')) closeModal(); });
+
+// ─── NEW PR ───────────────────────────────────────────────────
+function newPR() {
+  APP.current={header:{},items:[]};
+  ['h-state','h-mgr','h-email'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('h-pcode').value='';
+  document.getElementById('h-site').value='';
+  document.getElementById('h-date').value=todayISO();
+  document.getElementById('li-container').innerHTML='';
+  updateLICount();
+  goScreen('home');
+}
+
+// ─── UTILS ────────────────────────────────────────────────────
+function genReqNum() {
+  const d=new Date();
+  const yr=d.getFullYear();
+  const seq=String(Date.now()).slice(-4);
+  return `ENV-${yr}-${seq}`;
+}
+function badge(s){
+  const m={Pending:'b-pending',Approved:'b-approved',Rejected:'b-rejected'};
+  return `<span class="badge ${m[s]||'b-draft'}">${s||'Unknown'}</span>`;
+}
+function fmtDate(d){
+  if(!d||d==='—'||d==='') return '—';
+  try{return new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});}catch{return d;}
+}
+function todayISO(){return new Date().toISOString().split('T')[0];}
+function showLoad(msg){document.getElementById('loading-text').textContent=msg||'Loading...';document.getElementById('loading-overlay').classList.add('show');}
+function hideLoad(){document.getElementById('loading-overlay').classList.remove('show');}
+function showToast(msg,type){const t=document.getElementById('toast');t.textContent=msg;t.className='toast'+(type?' '+type:'');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);}
+</script>
+</body>
+</html>
